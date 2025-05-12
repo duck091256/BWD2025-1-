@@ -36,6 +36,23 @@
     "news": "Bảng tin",
     "about": "Về chúng tôi",
     "message": "Nhắn tin",
-    "login": "Đăng nhập"
+    "login": "Đăng nhập",
+    "profile": "Hồ sơ",
+    "logout": "Đăng xuất"
+  },
+  "profile": {
+    "title": "Thông tin cá nhân",
+    "upload": "Tải ảnh lên",
+    "fbLink": "Thêm liên kết Facebook",
+    "twitLink": "Thêm liên kết Twitter",
+    "igLink": "Thêm liên kết Instagram",
+    "ggLink": "Thêm liên kết Google+",
+    "username": "Tên người dùng",
+    "usernamePlaceholder": "Tên người dùng",
+    "provider": "Loại tài khoản",
+    "aboutme": "Về tôi",
+    "aboutmePlaceholder": "Hãy viết điều gì đó về bạn nhé",
+    "discardBtn": "Hoàn tác",
+    "saveBtn": "Lưu thay đổi"
   }
 }

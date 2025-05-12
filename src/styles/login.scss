@@ -7,15 +7,7 @@
     font-family: 'Poppins', 'sans-serif';
 }
 
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(90deg, #e2e2e2, #c9d6ff);
-}
-
-.container {
+.login-register-container {
     position: relative;
     width: 850px;
     height: 550px;
@@ -41,7 +33,7 @@ body {
     transition: .6s ease-in-out 1.2s, visibility 0s 1s;
 }
 
-.container.active .form-box {
+.login-register-container.active .form-box {
     right: 50%;
 }
 
@@ -49,7 +41,7 @@ body {
     visibility: hidden;
 }
 
-.container.active .form-box.register {
+.login-register-container.active .form-box.register {
     visibility: visible;
 }
 
@@ -57,7 +49,7 @@ form {
     width: 100%;
 }
 
-.container h1 {
+.login-register-container h1 {
     font-size: 36px;
     margin: -10px 0;
 }
@@ -147,7 +139,7 @@ form {
     }
 }
 
-.container p {
+.login-register-container p {
     font-size: 14.5px;
     margin: 15px 0;
 }
@@ -194,7 +186,7 @@ form {
     transition: 1.8s ease-in-out;
 }
 
-.container.active .toggle-box::before {
+.login-register-container.active .toggle-box::before {
     left: 50%;
 }
 
@@ -217,7 +209,7 @@ form {
     transition-delay: 1.2s;
 }
 
-.container.active .toggle-panel.toggle-left {
+.login-register-container.active .toggle-panel.toggle-left {
     left: -450px;
     transition-delay: .6s;
 }
@@ -227,7 +219,7 @@ form {
     transition-delay: .6s;
 }
 
-.container.active .toggle-panel.toggle-right {
+.login-register-container.active .toggle-panel.toggle-right {
     right: 0;
     transition-delay: 1.2s;
 }
@@ -245,7 +237,7 @@ form {
 }
 
 @media screen and (max-width: 880px) {
-    .container {
+    .login-register-container {
         height: calc(100vh - 40px);
         width: calc(100vh - 5px);
     }
@@ -256,7 +248,7 @@ form {
         height: 70%
     }
 
-    .container.active .form-box {
+    .login-register-container.active .form-box {
         right: 0;
         bottom: 30%;
     }
@@ -269,7 +261,7 @@ form {
         border-radius: 20vw;
     }
 
-    .container.active .toggle-box::before {
+    .login-register-container.active .toggle-box::before {
         left: 0;
         top: 70%;
     }
@@ -283,7 +275,7 @@ form {
         top: 0;
     }
 
-    .container.active .toggle-panel.toggle-left {
+    .login-register-container.active .toggle-panel.toggle-left {
         left: 0;
         top: -180px;
     }
@@ -293,7 +285,7 @@ form {
         bottom: -30%;
     }
 
-    .container.active .toggle-panel.toggle-right {
+    .login-register-container.active .toggle-panel.toggle-right {
         bottom: 0;
     }
 }

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/profile.scss';
+import { useTranslation } from 'react-i18next';
 
 const Profile = () => {
+  const { t } = useTranslation();
   const [user, setUser] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
@@ -81,7 +83,7 @@ const Profile = () => {
     <div>
       <div className="profile-container">
         <div className="left-panel">
-          <h2>PROFILE</h2>
+          <h2>{t('profile.title')}</h2>
           <div className="avatar">
             <img
               src={user.avatar}
@@ -89,46 +91,46 @@ const Profile = () => {
               style={{ width: 100, borderRadius: '50%', marginBottom: 10 }}
             />
           </div>
-          <div className="upload">Upload Picture</div>
+          <div className="upload">{t('profile.upload')}</div>
           <div className="social">
             <a href="#" style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', color: '#4267B2' }}>
               <i className="bx bxl-facebook-circle" style={{ fontSize: '24px', marginRight: '8px' }}></i>
-              Add Facebook
+              {t('profile.fbLink')}
             </a>
             
             <a href="#" style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', color: '#1DA1F2' }}>
               <i className="bx bxl-twitter" style={{ fontSize: '24px', marginRight: '8px' }}></i>
-              Add Twitter
+              {t('profile.twitLink')}
             </a>
 
             <a href="#" style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', color: '#E1306C' }}>
               <i className="bx bxl-instagram-alt" style={{ fontSize: '24px', marginRight: '8px' }}></i>
-              Add Instagram
+              {t('profile.igLink')}
             </a>
 
             <a href="#" style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', color: '#DB4437' }}>
               <i className="bx bxl-google-plus-circle" style={{ fontSize: '24px', marginRight: '8px' }}></i>
-              Add Google+
+              {t('profile.ggLink')}
             </a>
           </div>
         </div>
 
         <form className="right-panel" onSubmit={handleSave}>
-          <label>Username:</label>
-          <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="Username"/>
+          <label>{t('profile.username')}:</label>
+          <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder={t('profile.usernamePlaceholder')}/>
 
           <label>E-mail:</label>
           <input type="email" name="email" value={formData.email} />
 
-          <label>Provider:</label>
+          <label>{t('profile.provider')}:</label>
           <input type="text" name="provider" value={formData.provider} />
 
-          <label>About Me:</label>
-          <textarea name="aboutme" rows="4" value={formData.aboutme} onChange={handleChange} placeholder="Hãy viết điều gì đó về bạn nhé!" />
+          <label>{t('profile.aboutme')}:</label>
+          <textarea name="aboutme" rows="4" value={formData.aboutme} onChange={handleChange} placeholder={t('profile.aboutmePlaceholder')} />
 
           <div className="button-container">
-            <button type="button" className="discard-save-button btn" onClick={handleDiscard}>Discard Changes</button>
-            <button type="submit" className="save-button btn">Save Changes</button>
+            <button type="button" className="discard-save-button btn" onClick={handleDiscard}>{t('profile.discardBtn')}</button>
+            <button type="submit" className="save-button btn">{t('profile.saveBtn')}</button>
           </div>
         </form>
       </div>

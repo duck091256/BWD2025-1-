@@ -1,7 +1,11 @@
 import React from 'react';
 
 function Products() {
-  return <h2>Products Page</h2>;
+  return (
+    <div className="products-container">
+      <h2>Products Page</h2>
+    </div>
+  );
 }
 
 export default Products;

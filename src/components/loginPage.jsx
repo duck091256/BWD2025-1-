@@ -3,8 +3,17 @@ import '../styles/login.scss';
 import { useTranslation } from 'react-i18next';
 
 function LoginPage() {
+
+    useEffect(() => {
+        const user = localStorage.getItem("user");
+
+        if (user) {
+            window.location.href = '/';
+        }
+    }, []);
+
     const { t } = useTranslation();
-    
+
     useEffect(() => {
         import('../scripts/login.js');
     }, []);
@@ -121,7 +130,7 @@ function LoginPage() {
     };
 
     return (
-        <div className="container">
+        <div className="login-register-container">
             <div className="form-box login">
                 <form onSubmit={handleLogin}>
                     <h1>{t('loginPage.rightTitle')}</h1>

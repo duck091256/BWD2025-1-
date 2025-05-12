@@ -36,6 +36,23 @@
     "news": "News",
     "about": "About",
     "message": "Message",
-    "login": "Login"
+    "login": "Login",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
+  "profile": {
+    "title": "Profile",
+    "upload": "Upload Picture",
+    "fbLink": "Add Facebook",
+    "twitLink": "Add Twitter",
+    "igLink": "Add Instagram",
+    "ggLink": "Add Google+",
+    "username": "Username",
+    "usernamePlaceholder": "Username",
+    "provider": "Provider",
+    "aboutme": "About me",
+    "aboutmePlaceholder": "Write something about you!",
+    "discardBtn": "Discard Changes",
+    "saveBtn": "Save Changes"
   }
 }
