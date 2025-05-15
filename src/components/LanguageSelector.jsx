@@ -16,9 +16,6 @@ const LanguageSelector = () => {
     i18n.changeLanguage(code);
     localStorage.setItem('appLanguage', code);
 
-    document.body.classList.remove('lang-en', 'lang-vi');
-    document.body.classList.add(`lang-${code}`);
-
     setIsOpen(false);
   };
 
@@ -43,7 +40,14 @@ const LanguageSelector = () => {
   const currentFlag = LANGUAGES.find((l) => l.code === currentLang)?.flag || 'us';
 
   return (
-    <div className="language-selector" ref={menuRef} onClick={() => setIsOpen(!isOpen)}>
+    <div
+      className="language-selector"
+      ref={menuRef}
+      onClick={(e) => {
+        e.stopPropagation();
+        setIsOpen(!isOpen);
+      }}
+    >
       <div className="selected-lang">
         <img
           src={`https://hatscripts.github.io/circle-flags/flags/${currentFlag}.svg`}

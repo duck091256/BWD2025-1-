@@ -15,6 +15,7 @@ const createDatabaseAndTables = async () => {
   await connection.query(`
     CREATE TABLE IF NOT EXISTS users (
       id INT(11) NOT NULL AUTO_INCREMENT,
+      avatar VARCHAR(255),
       name VARCHAR(100),
       email VARCHAR(100),
       password VARCHAR(255) DEFAULT NULL,

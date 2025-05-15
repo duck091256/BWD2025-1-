@@ -66,7 +66,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// Google OAuth
+// Google OAuth config
 const GOOGLE_CLIENT_ID = '56923204359-bvfrbnjevbgf50ua855dma9h4gc93gjn.apps.googleusercontent.com';
 const GOOGLE_CLIENT_SECRET = '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';
 const GOOGLE_REDIRECT_URI = 'http://localhost:5000/api/auth/google/callback';
@@ -94,21 +94,22 @@ router.get('/auth/google/callback', async (req, res) => {
       headers: { Authorization: `Bearer ${access_token}` }
     });
 
-    const { email, name, picture } = userInfo.data;
+    // Thay đổi chỗ destructure này
+    const { email, name, picture: avatar } = userInfo.data;
 
     const [existing] = await query('SELECT * FROM users WHERE email = ?', [email]);
     if (existing.length === 0) {
       // Chưa có user, thêm mới
       await query(
-        'INSERT INTO users (name, email, password, auth_provider) VALUES (?, ?, ?, ?)',
-        [name, email, null, 'google']
+        'INSERT INTO users (avatar, name, email, password, auth_provider) VALUES (?, ?, ?, ?, ?)',
+        [avatar, name, email, null, 'Google']
       );
     } else {
       // Đã có user, kiểm tra provider
       const user = existing[0];
-      if (!user.auth_provider.includes('google')) {
+      if (!user.auth_provider.includes('Google')) {
         const providers = new Set(user.auth_provider.split(',').filter(Boolean));
-        providers.add('google');
+        providers.add('Google');
         const updatedProvider = Array.from(providers).join(',');
 
         await query('UPDATE users SET auth_provider = ? WHERE email = ?', [updatedProvider, email]);
@@ -116,7 +117,7 @@ router.get('/auth/google/callback', async (req, res) => {
     }
 
     // Gửi dữ liệu về frontend qua URL query
-    res.redirect(`http://localhost:3000/oauth-success?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(picture)}&provider=Google`);
+    res.redirect(`http://localhost:3000/oauth-success?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatar)}&provider=Google`);
 
   } catch (err) {
     console.error(err);
@@ -124,7 +125,7 @@ router.get('/auth/google/callback', async (req, res) => {
   }
 });
 
-// Discord OAuth
+// Discord OAuth config
 const DISCORD_CLIENT_ID = '1370100195274133664';
 const DISCORD_CLIENT_SECRET = 'KRDex32jakr0anszGo4ol0Dz_ao6DnI6';
 const DISCORD_REDIRECT_URI = 'http://localhost:5000/api/auth/discord/callback';
@@ -139,7 +140,7 @@ router.get('/auth/discord/callback', async (req, res) => {
 
   try {
     // Lấy access token
-    const tokenRes = await axios.post('https://discord.com/api/oauth2/token', new URLSearchParams({
+    const tokenResponse = await axios.post('https://discord.com/api/oauth2/token', new URLSearchParams({
       client_id: DISCORD_CLIENT_ID,
       client_secret: DISCORD_CLIENT_SECRET,
       grant_type: 'authorization_code',
@@ -150,39 +151,51 @@ router.get('/auth/discord/callback', async (req, res) => {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     });
 
-    const access_token = tokenRes.data.access_token;
+    const accessToken = tokenResponse.data.access_token;
 
-    // Lấy thông tin người dùng
-    const userRes = await axios.get('https://discord.com/api/users/@me', {
-      headers: { Authorization: `Bearer ${access_token}` }
+    // Lấy thông tin người dùng từ Discord
+    const userResponse = await axios.get('https://discord.com/api/users/@me', {
+      headers: { Authorization: `Bearer ${accessToken}` }
     });
 
-    const { username, email, avatar } = userRes.data;
+    const { id, username, discriminator, email, avatar } = userResponse.data;
 
-    if (!email) return res.status(400).send('Discord email not available');
+    if (!email) {
+      return res.status(400).send('Discord email not available');
+    }
 
-    // Kiểm tra email có tồn tại chưa
+    // Tạo URL avatar nếu có
+    let avatarUrl = '';
+    if (avatar) {
+      const format = avatar.startsWith('a_') ? 'gif' : 'png';
+      avatarUrl = `https://cdn.discordapp.com/avatars/${id}/${avatar}.${format}`;
+    }
+
+    const displayName = `${username}#${discriminator}`;
+
+    // Kiểm tra người dùng đã tồn tại hay chưa
     const [existing] = await query('SELECT * FROM users WHERE email = ?', [email]);
+
     if (existing.length === 0) {
       await query(
-        'INSERT INTO users (name, email, password, auth_provider) VALUES (?, ?, ?, ?)',
-        [username, email, null, 'discord']
+        'INSERT INTO users (avatar, name, email, password, auth_provider) VALUES (?, ?, ?, ?, ?)',
+        [avatarUrl, displayName, email, null, 'Discord']
       );
     } else {
       const user = existing[0];
-      if (!user.auth_provider.includes('discord')) {
+      if (!user.auth_provider.includes('Discord')) {
         const providers = new Set(user.auth_provider.split(',').filter(Boolean));
-        providers.add('discord');
+        providers.add('Discord');
         const updatedProvider = Array.from(providers).join(',');
         await query('UPDATE users SET auth_provider = ? WHERE email = ?', [updatedProvider, email]);
       }
     }
 
-    const avatarUrl = avatar ? `https://cdn.discordapp.com/avatars/${userRes.data.id}/${avatar}.png` : '';
+    // Gửi thông tin về frontend
+    res.redirect(`http://localhost:3000/oauth-success?name=${encodeURIComponent(displayName)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatarUrl)}&provider=Discord`);
 
-    res.redirect(`http://localhost:3000/oauth-success?name=${encodeURIComponent(username)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatarUrl)}&provider=Discord`);
   } catch (err) {
-    console.error(err);
+    console.error('Discord OAuth Error:', err);
     res.status(500).send('Discord OAuth Error');
   }
 });
@@ -192,78 +205,74 @@ const GITHUB_CLIENT_ID = 'Ov23li8asT9OKkV68Uqm';
 const GITHUB_CLIENT_SECRET = '30a18a87ba84f6bbe79506abc612555a4e751068';
 const GITHUB_REDIRECT_URI = 'http://localhost:5000/api/auth/github/callback';
 
-// B1: Redirect người dùng đến GitHub login
 router.get('/auth/github', (req, res) => {
   const githubUrl = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${GITHUB_REDIRECT_URI}&scope=user`;
   res.redirect(githubUrl);
 });
 
-// B2: GitHub callback
 router.get('/auth/github/callback', async (req, res) => {
   const { code } = req.query;
 
   try {
-    // Lấy access token từ GitHub
-    const tokenRes = await axios.post('https://github.com/login/oauth/access_token', {
-      client_id: GITHUB_CLIENT_ID,
-      client_secret: GITHUB_CLIENT_SECRET,
-      code,
-      redirect_uri: GITHUB_REDIRECT_URI,
-    }, {
-      headers: { Accept: 'application/json' }
+    // Get access token
+    const tokenResponse = await axios.post(
+      'https://github.com/login/oauth/access_token',
+      {
+        client_id: GITHUB_CLIENT_ID,
+        client_secret: GITHUB_CLIENT_SECRET,
+        code,
+        redirect_uri: GITHUB_REDIRECT_URI,
+      },
+      { headers: { Accept: 'application/json' } }
+    );
+
+    const accessToken = tokenResponse.data.access_token;
+
+    // Get user info
+    const userResponse = await axios.get('https://api.github.com/user', {
+      headers: { Authorization: `Bearer ${accessToken}` }
     });
 
-    const access_token = tokenRes.data.access_token;
+    let { login, avatar_url, email, name } = userResponse.data;
 
-    // Lấy thông tin user
-    const userRes = await axios.get('https://api.github.com/user', {
-      headers: { Authorization: `Bearer ${access_token}` }
-    });
-
-    const { login, avatar_url, email, name } = userRes.data;
-
-    // Nếu không có email, lấy thêm
-    let userEmail = email;
-    if (!userEmail) {
-      const emailsRes = await axios.get('https://api.github.com/user/emails', {
-        headers: { Authorization: `Bearer ${access_token}` }
+    // Get email if not available
+    if (!email) {
+      const emailsResponse = await axios.get('https://api.github.com/user/emails', {
+        headers: { Authorization: `Bearer ${accessToken}` }
       });
-      const primaryEmail = emailsRes.data.find(e => e.primary && e.verified);
-      userEmail = primaryEmail?.email;
+      const primaryEmail = emailsResponse.data.find(e => e.primary && e.verified);
+      email = primaryEmail?.email;
     }
 
-    if (!userEmail) return res.status(400).send("Cannot get email from GitHub");
+    if (!email) return res.status(400).send("GitHub email not available");
 
-    const [existing] = await query('SELECT * FROM users WHERE email = ?', [userEmail]);
+    const [existing] = await query('SELECT * FROM users WHERE email = ?', [email]);
+
+    const displayName = name || login;
+
     if (existing.length === 0) {
-      // Email chưa tồn tại -> tạo user mới
       await query(
-        'INSERT INTO users (name, email, password, auth_provider) VALUES (?, ?, ?, ?)',
-        [name || login, userEmail, null, 'github']
+        'INSERT INTO users (avatar, name, email, password, auth_provider) VALUES (?, ?, ?, ?, ?)',
+        [avatar_url, displayName, email, null, 'Github']
       );
     } else {
-      // Đã tồn tại user với email này (có thể từ Google / local)
       const user = existing[0];
-
-      // Nếu provider trước đó khác, cập nhật nếu cần
-      if (!user.auth_provider.includes('github')) {
-        // Ghép chuỗi các provider cũ với 'github' mà không bị trùng
+      if (!user.auth_provider.includes('Github')) {
         const providers = new Set(user.auth_provider.split(',').filter(Boolean));
-        providers.add('github');
+        providers.add('Github');
         const updatedProvider = Array.from(providers).join(',');
-
-        await query('UPDATE users SET auth_provider = ? WHERE email = ?', [updatedProvider, userEmail]);
+        await query('UPDATE users SET auth_provider = ? WHERE email = ?', [updatedProvider, email]);
       }
     }
 
-    res.redirect(`http://localhost:3000/oauth-success?name=${encodeURIComponent(name || login)}&email=${encodeURIComponent(userEmail)}&avatar=${encodeURIComponent(avatar_url)}&provider=Github`);
+    res.redirect(`http://localhost:3000/oauth-success?name=${encodeURIComponent(displayName)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatar_url)}&provider=GitHub`);
   } catch (err) {
-    console.error(err);
+    console.error('GitHub OAuth Error:', err);
     res.status(500).send('GitHub OAuth Error');
   }
 });
 
-// Facebook OAuth
+// Facebook OAuth config
 const FACEBOOK_CLIENT_ID = '1050396430472400';
 const FACEBOOK_CLIENT_SECRET = 'cdb40cf65c49d7b52facc8eebdb55a2c';
 const FACEBOOK_REDIRECT_URI = 'http://localhost:5000/api/auth/facebook/callback';
@@ -275,8 +284,10 @@ router.get('/auth/facebook', (req, res) => {
 
 router.get('/auth/facebook/callback', async (req, res) => {
   const { code } = req.query;
+
   try {
-    const tokenRes = await axios.get('https://graph.facebook.com/v18.0/oauth/access_token', {
+    // Get access token
+    const tokenResponse = await axios.get('https://graph.facebook.com/v18.0/oauth/access_token', {
       params: {
         client_id: FACEBOOK_CLIENT_ID,
         client_secret: FACEBOOK_CLIENT_SECRET,
@@ -285,35 +296,41 @@ router.get('/auth/facebook/callback', async (req, res) => {
       }
     });
 
-    const access_token = tokenRes.data.access_token;
+    const accessToken = tokenResponse.data.access_token;
 
-    const userRes = await axios.get('https://graph.facebook.com/me', {
+    // Get user info
+    const userResponse = await axios.get('https://graph.facebook.com/me', {
       params: {
         fields: 'id,name,email,picture',
-        access_token
+        access_token: accessToken
       }
     });
 
-    const { name, email, picture } = userRes.data;
+    const { name, email, picture } = userResponse.data;
+    const avatarUrl = picture?.data?.url || '';
 
     if (!email) return res.status(400).send('Facebook email not available');
 
     const [existing] = await query('SELECT * FROM users WHERE email = ?', [email]);
+
     if (existing.length === 0) {
-      await query('INSERT INTO users (name, email, password, auth_provider) VALUES (?, ?, ?, ?)', [name, email, null, 'facebook']);
+      await query(
+        'INSERT INTO users (avatar, name, email, password, auth_provider) VALUES (?, ?, ?, ?, ?)',
+        [avatarUrl, name, email, null, 'Facebook']
+      );
     } else {
       const user = existing[0];
-      if (!user.auth_provider.includes('facebook')) {
+      if (!user.auth_provider.includes('Facebook')) {
         const providers = new Set(user.auth_provider.split(',').filter(Boolean));
-        providers.add('facebook');
+        providers.add('Facebook');
         const updatedProvider = Array.from(providers).join(',');
         await query('UPDATE users SET auth_provider = ? WHERE email = ?', [updatedProvider, email]);
       }
     }
 
-    res.redirect(`http://localhost:3000/oauth-success?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(picture?.data?.url)}&provider=Facebook`);
+    res.redirect(`http://localhost:3000/oauth-success?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatarUrl)}&provider=Facebook`);
   } catch (err) {
-    console.error(err);
+    console.error('Facebook OAuth Error:', err);
     res.status(500).send('Facebook OAuth Error');
   }
 });

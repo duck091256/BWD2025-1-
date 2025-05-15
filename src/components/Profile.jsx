@@ -6,6 +6,7 @@ const Profile = () => {
   const { t } = useTranslation();
   const [user, setUser] = useState(null);
   const [formData, setFormData] = useState({
+    avatar: '',
     name: '',
     email: '',
     provider: '',
@@ -18,10 +19,11 @@ const Profile = () => {
     if (userData) {
       setUser(userData);
       setFormData({
+        avatar: userData.avatar,
         name: userData.name,
         email: userData.email,
         provider: userData.provider,
-        aboutme: userData.aboutme || 'I am Thanhduck, a dedicated UI/UX Designer from VKU.',
+        aboutme: userData.aboutme,
       });
       localStorage.setItem('backupData', JSON.stringify(userData));
     }
@@ -38,6 +40,7 @@ const Profile = () => {
     const backup = JSON.parse(localStorage.getItem('backupData'));
     if (backup) {
       setFormData({
+        avatar: backup.avatar,
         name: backup.name,
         email: backup.email,
         provider: backup.provider,
@@ -58,6 +61,7 @@ const Profile = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         userId: user.id,
+        avatar: formData.avatar,
         name: formData.name,
         email: formData.email,
         provider: formData.provider,
@@ -93,24 +97,24 @@ const Profile = () => {
           </div>
           <div className="upload">{t('profile.upload')}</div>
           <div className="social">
-            <a href="#" style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', color: '#4267B2' }}>
+            <a className="link-fb" href="#" style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
               <i className="bx bxl-facebook-circle" style={{ fontSize: '24px', marginRight: '8px' }}></i>
-              {t('profile.fbLink')}
+              <span>{t('profile.fbLink')}</span>
             </a>
             
-            <a href="#" style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', color: '#1DA1F2' }}>
+            <a className="link-twit" href="#" style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
               <i className="bx bxl-twitter" style={{ fontSize: '24px', marginRight: '8px' }}></i>
-              {t('profile.twitLink')}
+              <span>{t('profile.twitLink')}</span>
             </a>
 
-            <a href="#" style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', color: '#E1306C' }}>
+            <a className="link-ig" href="#" style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
               <i className="bx bxl-instagram-alt" style={{ fontSize: '24px', marginRight: '8px' }}></i>
-              {t('profile.igLink')}
+              <span>{t('profile.igLink')}</span>
             </a>
 
-            <a href="#" style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', color: '#DB4437' }}>
+            <a className="link-gg" href="#" style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
               <i className="bx bxl-google-plus-circle" style={{ fontSize: '24px', marginRight: '8px' }}></i>
-              {t('profile.ggLink')}
+              <span>{t('profile.ggLink')}</span>
             </a>
           </div>
         </div>

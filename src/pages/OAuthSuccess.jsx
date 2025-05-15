@@ -15,7 +15,6 @@ const OAuthSuccess = () => {
             name,
             email,
             avatar,
-            // provider: 'google'
             provider
         };
 

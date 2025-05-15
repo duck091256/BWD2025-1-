@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/UserMenu.scss';
 import { useTranslation } from 'react-i18next';
+import LanguageSelector from './LanguageSelector';
+import ThemeToggle from './ThemeToggle';
 
 const UserMenu = ({ user }) => {
     const { t } = useTranslation();
@@ -28,11 +30,41 @@ const UserMenu = ({ user }) => {
     }, []);
 
     return (
-        <div className="user-menu" ref={menuRef} onClick={() => setIsOpen(!isOpen)}>
-            <img src={user.avatar} alt="avatar" className="avatar" />
+        <div className="user-menu" ref={menuRef}>
+            <img
+                src={user.avatar}
+                alt="avatar"
+                className="avatar"
+                onClick={() => setIsOpen((prev) => !prev)}
+            />
             <ul className={`dropdown ${isOpen ? 'active' : ''}`}>
-                <li><Link to="/profile">{t('nav.profile')}</Link></li>
-                <li onClick={handleLogout}><Link to="/logout">{t('nav.logout')}</Link></li>
+                <li>
+                    <div className="locales">
+                        <LanguageSelector />
+                    </div>
+                </li>
+
+                <li>
+                    <div className="link-to-profile">
+                        <Link to="/profile">
+                            {t('nav.profile')}
+                        </Link>
+                    </div>
+                </li>
+
+                <li onClick={handleLogout}>
+                    <div className="link-to-logout">
+                        <Link to="/logout">
+                            {t('nav.logout')}
+                        </Link>
+                    </div>
+                </li>
+
+                <li>
+                    <div className="mode">
+                        {t('nav.theme')}<ThemeToggle />
+                    </div>
+                </li>
             </ul>
         </div>
     );

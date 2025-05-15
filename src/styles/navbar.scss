@@ -64,21 +64,6 @@
     gap: 10px;
 }
 
-.nav .locales {
-    display: flex;    
-    align-items: center;
-    background-color: white;
-    padding: 6px 8px 6px 8px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-    transition: transform 0.2s ease, color 0.2s ease, background-color 0.2s ease;
-}
-
-.nav .locales:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 16px rgba(46, 139, 87, 0.4);
-}
-
 /* Các mục */
 .nav ul li {
     position: relative;
@@ -117,7 +102,7 @@
     /* Di chuyển lên nhẹ và phóng to ít hơn */
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-    animation: hoverAnimation 0.2s ease-out, glowEffect 0.3s ease-in-out;
+    animation: hoverAnimation 0.2s ease-out;
 }
 
 /* Khi click vào mục */
@@ -166,22 +151,6 @@
     100% {
         transform: scale(1);
         /* Trở lại kích thước ban đầu */
-    }
-}
-
-/* Hiệu ứng ánh sáng (Glow) khi hover */
-@keyframes glowEffect {
-    0% {
-        box-shadow: 0 0 8px #B0E0E6, 0 0 15px #2E8B57;
-        /* Ánh sáng nhẹ từ gradient */
-    }
-
-    50% {
-        box-shadow: 0 0 12px #B0E0E6, 0 0 20px #2E8B57;
-    }
-
-    100% {
-        box-shadow: 0 0 8px #B0E0E6, 0 0 15px #2E8B57;
     }
 }
 

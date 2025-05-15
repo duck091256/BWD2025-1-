@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import LoginPage from '../components/LoginPage';
 import Navbar from '../components/Navbar';
@@ -16,45 +16,77 @@ import i18n from '../i18n';
 
 function BodyClassManager() {
   const location = useLocation();
+  const [lang, setLang] = useState(i18n.language || 'en');
 
   useEffect(() => {
-    // Tạo class theo pathname, ví dụ: "/login" => "page-login"
+    const handleLangChange = (lng) => {
+      setLang(lng);
+    };
+
+    i18n.on('languageChanged', handleLangChange);
+
+    return () => {
+      i18n.off('languageChanged', handleLangChange);
+    };
+  }, []);
+
+  useEffect(() => {
     const page = location.pathname === '/' ? 'home' : location.pathname.slice(1).replace(/\//g, '-');
     const pageClass = `page-${page}`;
 
-    // Reset body class rồi thêm class mới
-    document.body.classList.remove(...document.body.classList);
-    document.body.classList.add(pageClass);
-  }, [location]);
+    // Xoá tất cả class bắt đầu bằng page- và lang-
+    const classesToRemove = Array.from(document.body.classList).filter(cls =>
+      cls.startsWith('page-') || cls.startsWith('lang-')
+    );
+    document.body.classList.remove(...classesToRemove);
+    document.body.classList.add(pageClass, `lang-${lang}`);
+  }, [location, lang]);
 
-  return null; // Component này không render gì, chỉ để quản lý class
+  return null;
+}
+
+function AppContent() {
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+
+  useEffect(() => {
+    const savedLang = localStorage.getItem("appLanguage") || "en";
+    document.body.classList.remove("lang-en", "lang-vi");
+    document.body.classList.add(`lang-${savedLang}`);
+  }, []);
+
+  return (
+    <>
+      <BodyClassManager />
+      <Navbar />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+
+      {!isHome && (
+        <div style={{ paddingTop: "70px" }}>
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/travel" element={<Travel />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/message" element={<Message />} />
+            <Route path="/oauth-success" element={<OAuthSuccess />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </div>
+      )}
+    </>
+  );
 }
 
 function App() {
-    useEffect(() => {
-    const lang = i18n.language || 'en';
-    document.body.classList.remove('lang-en', 'lang-vi'); // Xóa cũ
-    document.body.classList.add(`lang-${i18n.language}`); // Thêm mới
-  }, [i18n.language]);
-
   return (
     <Router>
-      <BodyClassManager />
-      <Navbar />
-      <div style={{ paddingTop: '70px' }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/travel" element={<Travel />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/news" element={<News />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/message" element={<Message />} />
-          <Route path="/oauth-success" element={<OAuthSuccess />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/settings" element={<Settings />} />
-        </Routes>
-      </div>
+      <AppContent />
     </Router>
   );
 }

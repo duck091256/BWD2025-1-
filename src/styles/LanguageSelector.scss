@@ -1,14 +1,17 @@
 .language-selector {
+    width: 100%;
     position: relative;
     cursor: pointer;
 
     .selected-lang {
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: 6px;
+        height: 49px;
 
         .lang-code {
-            font-weight: bold;
+            font-weight: 600;
             text-transform: uppercase;
             font-size: 18px;
         }
@@ -16,8 +19,8 @@
 
 
     .flag-icon {
-        width: 28px;
-        height: 28px;
+        width: 30px;
+        height: 30px;
         border-radius: 50%;
         margin: 0;
     }
@@ -25,7 +28,7 @@
     .lang-dropdown {
         position: absolute;
         right: -22px;
-        margin-top: 26px;
+        margin-top: 15px;
         background: white;
         border: 1px solid #ccc;
         border-radius: 6px;
@@ -38,13 +41,13 @@
         height: auto;
 
         opacity: 0;
-        transform: translateY(-10px);
+        transform: translateX(-269px) translateY(-65px);
         pointer-events: none;
         transition: opacity 0.25s ease, transform 0.25s ease;
 
         &.active {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateX(-275px) translateY(-65px);
             pointer-events: auto;
             display: block;
         }
@@ -55,9 +58,11 @@
             list-style: none;
             border-radius: 0%;
             width: 100%;
+            justify-content: left;
 
             &:hover {
-                background-color: lightgray;
+                border-radius: 6px;
+                background-color: #f0f0f0;
             }
             
             a {

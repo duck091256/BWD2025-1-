@@ -4,7 +4,6 @@ import '../styles/navbar.scss';
 import logo from '../assets/images/logo/travel-logo.png';
 import UserMenu from './UserMenu';
 import { useTranslation } from 'react-i18next';
-import LanguageSelector from './LanguageSelector';
 
 const Navbar = () => {
     const { t } = useTranslation();
@@ -53,12 +52,6 @@ const Navbar = () => {
 
             <div className={`nav-right ${isOpen ? 'open' : ''}`}>
                 <ul>
-                    <li>
-                        <div className="locales">
-                            <LanguageSelector />
-                        </div>
-                    </li>
-
                     <li className="linkPage"><NavLink to='/message'>{t('nav.message')}</NavLink></li>
                     {!user && (
                         <li className="linkPage">
