@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import LoginPage from '../components/LoginPage';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer2'
 import Home from '../pages/Home';
 import Travel from '../pages/Travel';
 import Products from '../pages/Products';
@@ -47,6 +48,7 @@ function BodyClassManager() {
 
 function AppContent() {
   const location = useLocation();
+  const hideFooterPaths = ['/login', '/register', '/profile', '/message', '/about'];
   const isHome = location.pathname === "/";
 
   useEffect(() => {
@@ -65,20 +67,24 @@ function AppContent() {
       </Routes>
 
       {!isHome && (
-        <div style={{ paddingTop: "70px" }}>
-          <Routes>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/travel" element={<Travel />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/news" element={<News />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/message" element={<Message />} />
-            <Route path="/oauth-success" element={<OAuthSuccess />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/settings" element={<Settings />} />
-          </Routes>
+        <div className="page-container" style={{ paddingTop: "70px" }}>
+          <div className="content-wrap">
+            <Routes>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/travel" element={<Travel />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/news" element={<News />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/message" element={<Message />} />
+              <Route path="/oauth-success" element={<OAuthSuccess />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/settings" element={<Settings />} />
+            </Routes>
+          </div>
         </div>
       )}
+
+      {!hideFooterPaths.includes(location.pathname) && <Footer />}
     </>
   );
 }
