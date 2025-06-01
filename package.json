@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
@@ -11,6 +12,7 @@
     "axios": "^1.9.0",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
+    "emailjs": "^4.0.3",
     "express": "^5.1.0",
     "feather-icons": "^4.29.2",
     "framer-motion": "^12.11.4",

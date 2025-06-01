@@ -12,7 +12,6 @@ import imgcuatrang4 from '../assets/images/home/imgcuatrang4.png'
 import imgtrangcuoi from '../assets/images/home/imgtrangcuoi.png'
 import { useTranslation } from 'react-i18next';
 import backgroundVideo from '../assets/images/home/backgroundVideo2.mp4'
-import fullpage from 'fullpage.js';
 import 'fullpage.js/dist/fullpage.min.css';
 
 function Home() {

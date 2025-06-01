@@ -14,6 +14,7 @@ import OAuthSuccess from '../pages/OAuthSuccess';
 import Profile from '../components/Profile';
 import Settings from '../components/Settings';
 import i18n from '../i18n';
+import { UserProvider } from '../context/UserContext';
 
 function BodyClassManager() {
   const location = useLocation();
@@ -48,7 +49,7 @@ function BodyClassManager() {
 
 function AppContent() {
   const location = useLocation();
-  const hideFooterPaths = ['/login', '/register', '/profile', '/message', '/about'];
+  const hideFooterPaths = ['/login', '/logout', '/register', '/profile', '/message', '/about'];
   const isHome = location.pathname === "/";
 
   useEffect(() => {
@@ -92,7 +93,9 @@ function AppContent() {
 function App() {
   return (
     <Router>
-      <AppContent />
+      <UserProvider>
+        <AppContent />
+      </UserProvider>
     </Router>
   );
 }

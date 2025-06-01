@@ -94,18 +94,16 @@ router.get('/auth/google/callback', async (req, res) => {
       headers: { Authorization: `Bearer ${access_token}` }
     });
 
-    // Thay đổi chỗ destructure này
     const { email, name, picture: avatar } = userInfo.data;
 
     const [existing] = await query('SELECT * FROM users WHERE email = ?', [email]);
+
     if (existing.length === 0) {
-      // Chưa có user, thêm mới
       await query(
-        'INSERT INTO users (avatar, name, email, password, auth_provider) VALUES (?, ?, ?, ?, ?)',
-        [avatar, name, email, null, 'Google']
+        'INSERT INTO users (username, name, email, password, auth_provider, avatar) VALUES (?, ?, ?, ?, ?, ?)',
+        [name, null, email, null, 'Google', avatar]
       );
     } else {
-      // Đã có user, kiểm tra provider
       const user = existing[0];
       if (!user.auth_provider.includes('Google')) {
         const providers = new Set(user.auth_provider.split(',').filter(Boolean));
@@ -116,7 +114,6 @@ router.get('/auth/google/callback', async (req, res) => {
       }
     }
 
-    // Gửi dữ liệu về frontend qua URL query
     res.redirect(`http://localhost:3000/oauth-success?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatar)}&provider=Google`);
 
   } catch (err) {
@@ -178,8 +175,8 @@ router.get('/auth/discord/callback', async (req, res) => {
 
     if (existing.length === 0) {
       await query(
-        'INSERT INTO users (avatar, name, email, password, auth_provider) VALUES (?, ?, ?, ?, ?)',
-        [avatarUrl, displayName, email, null, 'Discord']
+        'INSERT INTO users (username, name, email, password, auth_provider, avatar) VALUES (?, ?, ?, ?, ?, ?)',
+        [displayName, null, email, null, 'Discord', avatarUrl]
       );
     } else {
       const user = existing[0];
@@ -252,8 +249,8 @@ router.get('/auth/github/callback', async (req, res) => {
 
     if (existing.length === 0) {
       await query(
-        'INSERT INTO users (avatar, name, email, password, auth_provider) VALUES (?, ?, ?, ?, ?)',
-        [avatar_url, displayName, email, null, 'Github']
+        'INSERT INTO users (username, name, email, password, auth_provider, avatar) VALUES (?, ?, ?, ?, ?, ?)',
+        [name, null, displayName, email, null, 'Github', avatar_url]
       );
     } else {
       const user = existing[0];
@@ -315,8 +312,8 @@ router.get('/auth/facebook/callback', async (req, res) => {
 
     if (existing.length === 0) {
       await query(
-        'INSERT INTO users (avatar, name, email, password, auth_provider) VALUES (?, ?, ?, ?, ?)',
-        [avatarUrl, name, email, null, 'Facebook']
+        'INSERT INTO users (username, name, email, password, auth_provider, avatar) VALUES (?, ?, ?, ?, ?, ?)',
+        [name, null, email, null, 'Facebook', avatarUrl]
       );
     } else {
       const user = existing[0];
