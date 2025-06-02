@@ -1,11 +1,11 @@
-import React from 'react';
+import '../styles/about.scss';
 
-function About() {
+const About = () => {
   return (
     <div className="about-container">
       <h2>About us Page</h2>
     </div>
   );
-}
+};
 
-export default About
+export default About;

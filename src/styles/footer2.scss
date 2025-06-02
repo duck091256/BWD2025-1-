@@ -42,8 +42,13 @@
     padding: 0 10px;
 }
 
-.vku-logo {
+.logo-container {
+    display: flex;
+    justify-content: center; /* Căn giữa logo */
     margin-top: 30px;
+}
+
+.vku-logo {
     max-width: 150px;
     height: auto;
     transform: scale(4);
@@ -60,10 +65,13 @@
         min-width: auto;
     }
 
+    .logo-container {
+        margin-top: 25px;
+    }
+
     .vku-logo {
         max-width: 120px;
         transform: scale(3.5);
-        margin-top: 25px;
     }
 
     .footer-info {

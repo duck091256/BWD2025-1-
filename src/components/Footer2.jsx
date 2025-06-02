@@ -32,11 +32,13 @@ const Footer2 = () => {
           Copyright © 2022 - Trường Đại học Công nghệ Thông tin & Truyền Thông Việt - Hàn, Đại học Đà Nẵng
         </p>
         <p>Địa chỉ: 470 Đường Trần Đại Nghĩa, Hoà Hải, Ngũ Hành Sơn, Đà Nẵng</p>
-        <img
-          src={logo}
-          alt="VKU Logo"
-          className="vku-logo"
-        />
+        <div className="logo-container">
+          <img
+            src={logo}
+            alt="VKU Logo"
+            className="vku-logo"
+          />
+        </div>
       </div>
     </footer>
   );

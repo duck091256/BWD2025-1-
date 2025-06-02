@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
 import '../styles/travel.scss';
 
 const Travel = () => {
   return (
-    <div className="home-container">
-      Home
+    <div className="travel-container">
+      Travel
     </div>
   );
 };

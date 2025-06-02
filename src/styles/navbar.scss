@@ -1,15 +1,13 @@
 /* Cấu trúc cơ bản của thanh nav */
 .nav {
-    background: linear-gradient(135deg, #B0E0E6, #2E8B57);
     padding: 10px 0px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: 'Poppins', sans-serif;
     font-size: 17px;
     letter-spacing: 1px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    height: 65px;
+    height: 70px;
 
     /* 👉 Các dòng thêm mới để cố định trên cùng */
     position: fixed;

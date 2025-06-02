@@ -9,13 +9,6 @@ body {
   transition: background-color 0.5s, color 0.5s;
 }
 
-body:not(.page-news):not(.page-home) {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -38,6 +31,7 @@ body.light-mode {
   color: #000;
 
   .nav {
+    background: linear-gradient(135deg, #B0E0E6, #2E8B57);
 
     .linkPage a:hover {
       animation: glowEffect-light 0.3s ease-in-out;
