@@ -114,9 +114,18 @@
 // Phrase 2
 
 import { useRef, useState , useEffect} from "react";
+import { useTranslation } from 'react-i18next';
 import "../styles/ImageSlider.scss";
+import greenTraveling1 from "../assets/images/home/green-traveling-12.jpg";
+import greenTraveling2 from "../assets/images/home/green-traveling-13.jpg";
+import greenTraveling3 from "../assets/images/home/green-traveling-14.jpg";
+import greenTraveling4 from "../assets/images/home/green-traveling-15.jpg";
+import greenTraveling5 from "../assets/images/home/green-traveling-10.jpg";
+import greenTraveling6 from "../assets/images/home/green-traveling-11.jpg";
+import greenTraveling7 from "../assets/images/home/green-traveling-6.jpg";
 
 const ImageSlider = () => {
+  const { t } = useTranslation();
   const slideRef = useRef(null);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
 
@@ -124,7 +133,15 @@ const ImageSlider = () => {
     const timer = setTimeout(() => {
       setIsInitialLoad(false);
     }, 1400);
-    return () => clearTimeout(timer);
+
+    const interval = setInterval(() => {
+      handleClickNext();
+    }, 5000);
+
+    return () => {
+      clearTimeout(timer);
+      clearInterval(interval);
+    }
   }, []);
 
   const handleClickNext = () => {
@@ -140,36 +157,45 @@ const ImageSlider = () => {
   const data = [
     {
       id: 1,
-      imgUrl: "https://i.postimg.cc/PrMGqZwx/pexels-m-venter-1659437.jpg",
-      desc: "Some beautiful roads cannot be discovered without getting loss.",
-      name: "EXPLORE NATURE",
+      imgUrl: greenTraveling1,
+      desc: t(`home.item1.desc`),
+      name: t(`home.item1.name`),
     },
     {
       id: 2,
-      imgUrl:
-        "https://i.postimg.cc/bw6KxhLf/pexels-eberhard-grossgasteiger-1062249.jpg",
-      desc: "Some beautiful roads cannot be discovered without getting loss.",
-      name: "EXPLORE NATURE",
+      imgUrl: greenTraveling2,
+      desc: t(`home.item2.desc`),
+      name: t(`home.item2.name`),
     },
     {
       id: 3,
-      imgUrl:
-        "https://i.postimg.cc/CMkTW9Mb/pexels-eberhard-grossgasteiger-572897.jpg",
-      desc: "Some beautiful roads cannot be discovered without getting loss.",
-      name: "EXPLORE NATURE",
+      imgUrl: greenTraveling3,
+      desc: t(`home.item3.desc`),
+      name: t(`home.item3.name`),
+    },
+    {
+      id: 4,
+      imgUrl: greenTraveling4,
+      desc: t(`home.item4.desc`),
+      name: t(`home.item4.name`),
     },
     {
       id: 5,
-      imgUrl: "https://i.postimg.cc/6qdkn4bM/pexels-joyston-judah-933054.jpg",
-      desc: "Some beautiful roads cannot be discovered without getting loss.",
-      name: "EXPLORE NATURE",
+      imgUrl: greenTraveling5,
+      desc: t(`home.item5.desc`),
+      name: t(`home.item5.name`),
     },
     {
       id: 6,
-      imgUrl:
-        "https://i.postimg.cc/RVm59Gqy/pexels-roberto-nickson-2559941.jpg",
-      desc: "Some beautiful roads cannot be discovered without getting loss.",
-      name: "EXPLORE NATURE",
+      imgUrl: greenTraveling6,
+      desc: t(`home.item6.desc`),
+      name: t(`home.item6.name`),
+    },
+    {
+      id: 7,
+      imgUrl: greenTraveling7,
+      desc: t(`home.item7.desc`),
+      name: t(`home.item7.name`),
     },
   ];
 
@@ -188,16 +214,16 @@ const ImageSlider = () => {
               <div className="slider-content">
                 <div className="name">{item.name}</div>
                 <div className="des">{item.desc}</div>
-                <button>See more</button>
+                <button>{t(`home.button`)}</button>
               </div>
             </div>
           ))}
         </div>
         <div className="slider-buttons">
-          <button id="prev" onClick={handleClickPrev}>
+          <button id="prev" onClick={handleClickNext}>
             <i className="fa-solid fa-angle-left"></i>
           </button>
-          <button id="next" onClick={handleClickNext}>
+          <button id="next" onClick={handleClickPrev}>
             <i className="fa-solid fa-angle-right"></i>
           </button>
         </div>

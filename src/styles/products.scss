@@ -1,103 +1,100 @@
  /* Logo nằm bên trái */
-  .logo img {
-  height: 65px;         /* to hơn một chút */
-  width: auto;
-  object-fit: contain;
-  border-radius: 10px;
-  }
+  // .logo img {
+  // height: 65px;         /* to hơn một chút */
+  // width: auto;
+  // object-fit: contain;
+  // border-radius: 10px;
+  // }
   
   /* Danh sách menu nằm bên phải */
-  .list {
-  list-style-type: none;
-  display: flex;
-  align-items: center;
-  gap: 25px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: clamp(14px, 2.2vw, 22px); /* tăng size nhẹ */
-  font-weight: 550; /* chữ đậm hơn */
-  }
+//   .list {
+//   list-style-type: none;
+//   display: flex;
+//   align-items: center;
+//   gap: 25px;
+//   font-family: Verdana, Geneva, Tahoma, sans-serif;
+//   font-size: clamp(14px, 2.2vw, 22px); /* tăng size nhẹ */
+//   font-weight: 550; /* chữ đậm hơn */
+//   }
   
-  .lienket {
-  text-decoration: none;
-  color: aliceblue;
-  font-weight: 700;
-  font-size: 18px;
-  transition: 0.3s ease;
-  }
+//   .lienket {
+//   text-decoration: none;
+//   color: aliceblue;
+//   font-weight: 700;
+//   font-size: 18px;
+//   transition: 0.3s ease;
+//   }
   
-  .lienket:hover {
-  opacity: 80%;
-  }
+//   .lienket:hover {
+//   opacity: 80%;
+//   }
 
-  /* Ẩn nút hamburger trên desktop */
-.hamburger {
-  display: none;
-  font-size: 28px;
-  cursor: pointer;
-  color: white;
-  padding: 10px;
-}
+// //   /* Ẩn nút hamburger trên desktop */
+// // .hamburger {
+// //   display: none;
+// //   font-size: 28px;
+// //   cursor: pointer;
+// //   color: white;
+// //   padding: 10px;
+// // }
 
-/* Menu list mặc định */
-.nav-container .list {
-  display: flex;
-  gap: 20px;
-  list-style: none;
-}
+// // /* Menu list mặc định */
+// // .nav-container .list {
+// //   display: flex;
+// //   gap: 20px;
+// //   list-style: none;
+// // }
 
-@keyframes slideFadeIn {
-  0% {
-  opacity: 0;
-  transform: translateY(-10%);
-  }
-  100% {
-  opacity: 1;
-  transform: translateY(0);
-  }
-}
+// @keyframes slideFadeIn {
+//   0% {
+//   opacity: 0;
+//   transform: translateY(-10%);
+//   }
+//   100% {
+//   opacity: 1;
+//   transform: translateY(0);
+//   }
+// }
 
-/* Responsive mobile */
-@media (max-width: 768px) {
-  .hamburger {
-  display: block;
-  font-size: 28px;
-  cursor: pointer;
-  color: white;
-  padding: 10px;
-  z-index: 1001;
-  position: relative;
-  }
+// /* Responsive mobile */
+// @media (max-width: 768px) {
+//   // .hamburger {
+//   // display: block;
+//   // font-size: 28px;
+//   // cursor: pointer;
+//   // color: white;
+//   // padding: 10px;
+//   // z-index: 1001;
+//   // position: relative;
+//   // }
 
-  .nav-container .list {
-  display: none;
-  flex-direction: column;
-  position: absolute;
-  top: 100px; /* 👈 Đẩy xuống hơn, tăng từ 60px lên 80px */
-  right: 20px;
-  background-color: #006666;
-  padding: 20px;
-  border-radius: 10px;
-  z-index: 1000;
-  opacity: 0;
-  transform: translateX(100%);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  }
+//   .nav-container .list {
+//   display: none;
+//   flex-direction: column;
+//   position: absolute;
+//   top: 100px; /* 👈 Đẩy xuống hơn, tăng từ 60px lên 80px */
+//   right: 20px;
+//   background-color: #006666;
+//   padding: 20px;
+//   border-radius: 10px;
+//   z-index: 1000;
+//   opacity: 0;
+//   transform: translateX(100%);
+//   transition: opacity 0.3s ease, transform 0.3s ease;
+//   }
 
-  .nav-container .list.show {
-  display: flex;
-  animation: slideFadeIn 0.5s ease forwards;
-  opacity: 1;
-  transform: translateX(0);
-  }
+//   .nav-container .list.show {
+//   display: flex;
+//   animation: slideFadeIn 0.5s ease forwards;
+//   opacity: 1;
+//   transform: translateX(0);
+//   }
 
-  .nav-container .list li {
-  margin: 10px 0;
-  text-align: right;
-  }
-}
-
-
-
+//   .nav-container .list li {
+//   margin: 10px 0;
+//   text-align: right;
+//   }
+// }
 
 /* Video nền */
 #background-video {
@@ -117,7 +114,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  z-index: 999; /* Đặt giá trị cao để luôn nằm trên các phần khác */
+  z-index: 1; /* Đặt giá trị cao để luôn nằm trên các phần khác */
   max-width: 800px;
   text-align: center;
 }
@@ -297,7 +294,7 @@
   color: #ffffff;
   text-decoration: none;
   cursor: pointer;
-  z-index: 999; 
+  z-index: 1; 
 }
 
 /* CSS cho modal */

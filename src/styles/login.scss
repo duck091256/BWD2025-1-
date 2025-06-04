@@ -6,14 +6,24 @@
     box-sizing: border-box;
 }
 
+.login-page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 95vh;
+    padding: 20px;
+}
+
 .login-register-container {
     position: relative;
-    width: 850px;
-    height: 550px;
+    width: 950px;
+    height: 600px;
     background: #fff;
     border-radius: 30px;
     box-shadow: 0 0 30px rgba(0, 0, 0, .2);
-    margin: 20px;
+    margin: 0 auto; // Giữ căn giữa
+    margin-top: 60px;
+    margin-bottom: 60px;
     overflow: hidden;
 }
 
@@ -235,8 +245,12 @@ form {
 }
 
 @media screen and (max-width: 880px) {
+    .login-page-wrapper {
+        padding: 10px;
+    }
+
     .login-register-container {
-        height: calc(100vh - 40px);
+        height: calc(100vh - 60px);
         width: calc(100vh - 5px);
     }
 

@@ -17,28 +17,37 @@
     "failMessage3": "Login failed!",
     "successMessage": "Welcome back! You’re now logged in."
   },
-
   "home": {
-    "bigTitle1": "GREEN",
-    "bigTitle2": "TRAVEL",
-    "subTitle": "T O W A R D S A S U S T A I N A B L E F U T U R E",
-    "introduction": "An eco-friendly travel style that respects, protects, and promotes local culture. Green travel not only safeguards nature but also preserves the beauty and identity of Vietnam’s ethnic cultures.",
-    "hintBtn": "Travel Suggestions",
-    "loginBtn": "Log in now",
-    "newsBtn": "Explore the feed",
-    "reason": "Why It Matters",
-    "reasonDescription": "The world is facing an environmental crisis, pollution, and poorly managed tourism that can harm nature and ecosystems. In Vietnam, many eco-tourism destinations remain undiscovered due to limited promotion.",
-    "issue": "Challenges",
-    "issue1": "Rising environmental pollution from littering by unaware tourists; overexploitation of natural resources like forests, streams, and coral reefs.",
-    "issue2": "Lack of guidance leaves many young people eager for green travel unsure where to start.",
-    "issue3": "Ineffective promotion means many green destinations, like pristine forests and eco-friendly craft villages, remain largely unknown.",
-    "issue4": "Low community awareness; green travel is often misunderstood as costly or inconvenient, and the impact of individual actions on the environment is overlooked.",
-    "action1": "Take",
-    "action2": "Action",
-    "product": "Our Product",
-    "actionDescription": "We’re a group of tech-savvy students who love nature. Together, we’ve brainstormed, designed, created content, and coded the 'Green Travel' website as a passion project to inspire others while showcasing modern web design skills and digital transformation in tourism."
+    "button": "See more",
+    "item1": {
+      "name": "WILD FOREST JOURNEY",
+      "desc": "Hike through untouched forests, breathe the fresh air, and reconnect with nature’s serenity."
+    },
+    "item2": {
+      "name": "RIVER ESCAPE",
+      "desc": "Paddle along tranquil rivers, where every stroke brings you closer to nature’s heartbeat."
+    },
+    "item3": {
+      "name": "WATERFALL WANDER",
+      "desc": "Discover hidden waterfalls and embrace the beauty of sustainable exploration."
+    },
+    "item4": {
+      "name": "ECO BIKE ADVENTURE",
+      "desc": "Cycle through rolling hills, leaving only footprints and taking only memories."
+    },
+    "item5": {
+      "name": "STARLIT CAMPING",
+      "desc": "Camp under the stars in eco-friendly sites, where nature is your only host."
+    },
+    "item6": {
+      "name": "COASTAL GREEN TRAIL",
+      "desc": "Explore coastal trails with minimal impact, preserving the ocean’s beauty for generations."
+    },
+    "item7": {
+      "name": "COMMUNITY ECO TOUR",
+      "desc": "Join local communities in sustainable travel, learning their ways to protect the earth."
+    }
   },
-
   "registerPage": {
     "rightTitle": "Welcome Back!",
     "subRightTitle": "Already have an account?",

@@ -6,6 +6,9 @@ import UserMenu from './UserMenu';
 import { useTranslation } from 'react-i18next';
 
 const Navbar = () => {
+    const [show, setShow] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
+
     const { t } = useTranslation();
 
     const [isOpen, setIsOpen] = useState(false);
@@ -14,6 +17,7 @@ const Navbar = () => {
 
     const [user, setUser] = useState(null);
 
+    // 📌 1. Lấy user từ localStorage
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
         if (storedUser) {
@@ -21,8 +25,29 @@ const Navbar = () => {
         }
     }, []);
 
+    // 📌 2. Theo dõi scroll để ẩn/hiện navbar
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                setShow(false); // Cuộn xuống => ẩn
+            } else {
+                setShow(true); // Cuộn lên => hiện
+            }
+
+            setLastScrollY(currentScrollY);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [lastScrollY]);
+
     return (
-        <nav className="nav">
+        <nav className={`nav ${show ? 'visible' : 'hidden'}`}>
             <div className="nav-logo">
                 <Link to='/'><img src={logo} alt="Logo" /></Link>
             </div>

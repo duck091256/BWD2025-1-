@@ -14,6 +14,7 @@ import Message from '../components/Message';
 import OAuthSuccess from '../pages/OAuthSuccess';
 import Profile from '../components/Profile';
 import Settings from '../components/Settings';
+import ScrollToTop from '../components/ScrollToTop';
 import i18n from '../i18n';
 import { UserProvider } from '../context/UserContext';
 
@@ -63,6 +64,7 @@ function AppContent() {
 
       <div className="page-container" style={{ paddingTop: "70px" }}>
         <div className="content-wrap">
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginPage />} />
