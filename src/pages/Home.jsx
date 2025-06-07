@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Masonry from 'react-masonry-css';
 import ReactPlayer from 'react-player';
+import { useTranslation } from 'react-i18next';
 import '../styles/home.scss';
 import ImageSlider from './ImageSlider';
 import posterVideo01 from '../assets/images/home/poster-video-1.jpg';
@@ -48,32 +49,33 @@ const childVariants = {
 
 // Hero Section Component
 const HeroSection = () => {
+  const { t } = useTranslation();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   const destinations = [
     {
       id: 1,
-      title: "Pù Luông - Thanh Hóa",
-      description: "Ruộng bậc thang nối tiếp rừng núi xanh mát, bản làng dân tộc thân thiện – nơi lý tưởng để nghỉ dưỡng giữa thiên nhiên hoang sơ.",
+      title: t('home.secondSection.title-img-1'),
+      description: t('home.secondSection.sub-title-img-1'),
       image: puLuong
     },
     {
       id: 2,
-      title: "Tràm Chim - Đồng Tháp",
-      description: "Khu rừng ngập nước nổi bật với hàng trăm loài chim quý, đưa du khách hòa mình vào hệ sinh thái đặc trưng miền Tây.",
+      title: t('home.secondSection.title-img-2'),
+      description: t('home.secondSection.sub-title-img-2'),
       image: tramChim
     },
     {
       id: 3,
-      title: "Sapa - Lào Cai",
-      description: "Khí hậu mát mẻ quanh năm, cảnh sắc hùng vĩ với ruộng bậc thang và những cung đường trekking giữa núi rừng Tây Bắc.",
+      title: t('home.secondSection.title-img-3'),
+      description: t('home.secondSection.sub-title-img-3'),
       image: sapa
     },
     {
       id: 4,
-      title: "Cúc Phương - Ninh Bình",
-      description: "Vườn quốc gia đầu tiên của Việt Nam, nổi bật với rừng nguyên sinh, động vật quý hiếm và các tuyến tham quan sinh thái hấp dẫn.",
+      title: t('home.secondSection.title-img-4'),
+      description: t('home.secondSection.sub-title-img-4'),
       image: cucPhuong
     }
   ];
@@ -82,7 +84,7 @@ const HeroSection = () => {
     <motion.div
       id="hero"
       ref={ref}
-      className="relative bg-green-100 py-20 px-6 text-center"
+      className="home-odd-floor relative bg-green-100 py-20 px-6 text-center"
       variants={sectionVariants}
       initial="hidden"
       animate={isInView ? 'visible' : 'hidden'}
@@ -91,20 +93,20 @@ const HeroSection = () => {
         className="text-4xl md:text-6xl font-bold text-green-700 mb-4"
         variants={childVariants}
       >
-        Khám phá Việt Nam Xanh
+        {t('home.secondSection.title')}
       </motion.h1>
       <motion.p
-        className="text-xl max-w-2xl mx-auto text-gray-600"
+        className="sub-title text-xl max-w-2xl mx-auto"
         variants={childVariants}
       >
-        Trải nghiệm thiên nhiên nguyên sơ, văn hóa bản địa và hành trình du lịch bền vững.
+        {t('home.secondSection.sub-title')}
       </motion.p>
-      <motion.div className="mt-8" variants={childVariants}>
+      <motion.div className="mt-8" variants={childVariants} whileHover={{ scale: 1.06 }} transition={{ duration: 0.3 }}>
         <Link
           to="/tours"
           className="text-lg bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700 transition"
         >
-          Khám phá ngay
+          {t('home.secondSection.button')}
         </Link>
       </motion.div>
 
@@ -141,25 +143,30 @@ const HeroSection = () => {
 
 // Why Choose Us Section
 const WhyChooseUs = () => {
+  const isDarkMode = document.body.classList.contains('dark-mode');
+
+  const { t } = useTranslation();
+
   const ref = useRef(null);
+
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [activeIndex, setActiveIndex] = useState(0);
   const underlineRef = useRef(null);
 
   const features = [
     {
-      title: "Tried and Trusted",
-      description: "We're trusted worldwide by 20 million travellers just like you.",
+      title: t('home.thirdSection.first-frame-title'),
+      description: t('home.thirdSection.first-frame-sub-title'),
       icon: "✓"
     },
     {
-      title: "Reliable Support",
-      description: "We're here for you. Reach out anytime by phone, email, or chat.",
+      title: t('home.thirdSection.second-frame-title'),
+      description: t('home.thirdSection.second-frame-sub-title'),
       icon: "✆"
     },
     {
-      title: "One-stop Travel Partner",
-      description: "Your search ends here. We've got your entire trip covered!",
+      title: t('home.thirdSection.third-frame-title'),
+      description: t('home.thirdSection.third-frame-sub-title'),
       icon: "✈"
     },
   ];
@@ -191,7 +198,7 @@ const WhyChooseUs = () => {
     <motion.section
       id="why-choose-us"
       ref={ref}
-      className="py-16 px-3 bg-white relative"
+      className="home-even-floor section-home py-16 px-3 bg-white relative"
       variants={sectionVariants}
       initial="hidden"
       animate={isInView ? 'visible' : 'hidden'}
@@ -200,7 +207,9 @@ const WhyChooseUs = () => {
         className="max-w-4xl mx-auto text-center mb-12"
         variants={childVariants}
       >
-        <h2 className="text-3xl font-bold mb-4 text-gray-800">Reason For Choosing Us</h2>
+        <h2 className="title text-3xl font-bold mb-4">
+          {t('home.thirdSection.title')}
+        </h2>
         <div className="w-20 h-1 bg-green-600 mx-auto"></div>
       </motion.div>
 
@@ -215,15 +224,39 @@ const WhyChooseUs = () => {
             variants={childVariants}
             onMouseEnter={() => setActiveIndex(index)}
           >
-            <div className={`text-4xl mb-4 ${activeIndex === index ? 'text-green-200 scale-110' : 'text-gray-400'} transition-all duration-300`}>
+            <div
+              className={`reason-icon text-4xl mb-4 transition-all duration-300 ${activeIndex === index ? 'scale-110' : ''}`}
+              style={{
+                color: activeIndex === index
+                  ? (isDarkMode ? 'rgba(255, 255, 255, 0.8)' : '#bbf7d0')  // text-green-200
+                  : (isDarkMode ? 'rgba(255, 255, 255, 0.4)' : '#9ca3af') // text-gray-400
+              }}
+            >
               {item.icon}
             </div>
-            <h3 className={`text-xl font-bold mb-3 ${activeIndex === index ? 'text-gray-800' : 'text-gray-600'} transition-colors duration-300`}>
+
+            <h3
+              className="reason-title text-xl font-bold mb-3 transition-colors duration-300"
+              style={{
+                color: activeIndex === index
+                  ? (isDarkMode ? 'rgba(255, 255, 255, 0.8)' : '#1f2937')  // text-gray-800
+                  : (isDarkMode ? 'rgba(255, 255, 255, 0.4)' : '#4b5563')  // text-gray-600
+              }}
+            >
               {item.title}
             </h3>
-            <p className={`${activeIndex === index ? 'text-gray-700' : 'text-gray-500'} leading-relaxed transition-colors duration-300`}>
+
+            <p
+              className="reason-desc leading-relaxed transition-colors duration-300"
+              style={{
+                color: activeIndex === index
+                  ? (isDarkMode ? 'rgba(255, 255, 255, 0.7)' : '#374151') // text-gray-700
+                  : (isDarkMode ? 'rgba(255, 255, 255, 0.5)' : '#6b7280') // text-gray-500
+              }}
+            >
               {item.description}
             </p>
+
           </motion.div>
         ))}
 
@@ -250,6 +283,7 @@ const getMinHeight = (index, isLargeScreen) => {
 
 // Vacation Section
 const VacationSection = () => {
+  const { t } = useTranslation();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
@@ -267,33 +301,33 @@ const VacationSection = () => {
   const destinations = [
     {
       id: 1,
-      title: "Làng Sinh Thái Núi Rừng",
-      description: "Trải nghiệm nghỉ dưỡng giữa đại ngàn",
+      title: t('home.fourthSection.iframe-1-title'),
+      description: t('home.fourthSection.iframe-1-desc'),
       image: LangSinhThai
     },
     {
       id: 2,
-      title: "Nông Trại Hữu Cơ",
-      description: "Tham quan, trồng rau, sống xanh mỗi ngày",
+      title: t('home.fourthSection.iframe-2-title'),
+      description: t('home.fourthSection.iframe-2-desc'),
       image: NongTrai
     },
     {
       id: 3,
-      title: "Homestay Ven Hồ",
-      description: "Bình yên giữa thiên nhiên nguyên sơ",
+      title: t('home.fourthSection.iframe-3-title'),
+      description: t('home.fourthSection.iframe-3-desc'),
       image: Homestay
     },
     {
       id: 4,
-      title: "Tour Trải Nghiệm Cộng Đồng",
-      description: "Khám phá văn hóa – bảo vệ môi trường",
+      title: t('home.fourthSection.iframe-4-title'),
+      description: t('home.fourthSection.iframe-4-desc'),
       image: TourTraiNghiem
     }
   ];
 
   return (
     <motion.section
-      className="flex items-center justify-center py-16 px-[3rem] bg-green-100"
+      className="home-odd-floor section-home flex items-center justify-center py-16 px-[3rem] bg-green-100"
       ref={ref}
       variants={sectionVariants}
       initial="hidden"
@@ -304,19 +338,22 @@ const VacationSection = () => {
         <motion.div className="flex flex-col lg:flex-row items-center gap-12">
           {/* Text content - left side */}
           <motion.div className="lg:w-1/2 self-start text-left">
-            <h1 className="text-4xl font-bold text-gray-800 mb-6">
-              Trải nghiệm du lịch xanh tại Việt Nam
+            <h1 className="title text-4xl font-bold mb-6">
+              {t('home.fourthSection.title')}
             </h1>
             <div className="w-64 h-1 bg-green-600 mb-12"></div>
-            <p className="text-xl text-gray-600 mb-14">
-              Cho dù bạn muốn thư giãn giữa thiên nhiên, tham gia các hoạt động ngoài trời, hay tìm hiểu văn hóa địa phương – du lịch xanh tại Việt Nam sẽ mang đến cho bạn trải nghiệm vừa thú vị vừa ý nghĩa.
-              Từ những khu sinh thái ven rừng đến homestay thân thiện với môi trường, hành trình của bạn sẽ luôn hài hòa với thiên nhiên và cộng đồng.
+            <p className="sub-title text-xl mb-14">
+              {t('home.fourthSection.desc')}
             </p>
-            <div className="relative flex lg:justify-start : md:justify-center">
+            <motion.div
+              className="relative flex lg:justify-start md:justify-center lg:origin-left"
+              whileHover={{ scale: 1.06 }}
+              transition={{ duration: 0.3 }}
+            >
               <button className="bg-green-600 hover:bg-green-700 text-white font-base px-8 py-3 rounded-full text-lg transition-colors duration-300 shadow-md hover:shadow-lg lg:inline-block">
-                Đặt Ngay
+                {t('home.fourthSection.button')}
               </button>
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Image grid - right side */}
@@ -349,7 +386,7 @@ const VacationSection = () => {
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="destination-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <motion.div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-4">
                     <h3 className="text-lg font-bold text-white mb-1">{item.title}</h3>
@@ -394,19 +431,19 @@ const VideoWithPoster = ({ url, poster }) => {
 
 // TourBlog Section
 const TourBlogSection = () => {
+  const { t } = useTranslation();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   const content = [
     {
       type: "text",
-      title: "Khám phá đồi chè xanh mướt",
-      description: "Trải nghiệm cuộc sống nông thôn Việt Nam khi tham gia thu hoạch chè cùng người dân địa phương. Đắm mình trong cảnh sắc thiên nhiên hùng vĩ và nhịp sống yên bình nơi vùng cao.",
-      cta: "Tìm hiểu thêm"
+      description: t('home.fifthSection.desc-1'),
+      cta: t('home.fifthSection.button-1'),
     },
     {
       type: "video",
-      src: "https://www.youtube.com/watch?v=OZtOMLxsfr4", // Thay bằng URL video thực tế
+      src: "https://www.youtube.com/watch?v=OZtOMLxsfr4",
       poster: posterVideo01
     },
     {
@@ -416,16 +453,15 @@ const TourBlogSection = () => {
     },
     {
       type: "text",
-      title: "Đêm Hội An rực rỡ sắc màu",
-      description: "Dạo bước trong không gian cổ kính, thưởng thức ánh đèn lồng lung linh và khám phá văn hóa truyền thống tại phố cổ Hội An – di sản văn hóa thế giới.",
-      cta: "Khám phá ngay"
+      description: t('home.fifthSection.desc-2'),
+      cta: t('home.fifthSection.button-2')
     }
   ];
 
   return (
     <motion.section
       ref={ref}
-      className="py-16 px-[3rem] bg-white"
+      className="home-even-floor section-home py-16 px-[3rem] bg-white"
       variants={sectionVariants}
       initial="hidden"
       animate={isInView ? 'visible' : 'hidden'}
@@ -436,7 +472,7 @@ const TourBlogSection = () => {
           className="text-4xl font-bold mb-3 ml-4"
           variants={childVariants}
         >
-          Blog Tour Của Chúng Tôi
+          {t('home.fifthSection.title')}
         </motion.h2>
         <div className="w-32 h-1 bg-green-600 ml-4"></div>
 
@@ -457,16 +493,27 @@ const TourBlogSection = () => {
                   <p className="text-xl mb-6 leading-relaxed">
                     {item.description}
                   </p>
-                  <div className={`${index === 3 ? 'flex justify-end' : ''}`}>
-                    <button className="self-start bg-green-600 text-white px-6 py-2 rounded-full font-base text-lg hover:bg-green-700 transition">
-                      {item.cta}
-                    </button>
+                  <div
+                    className={`
+                      ${index === 3 ? 'flex justify-end' : ''}
+                      ${index === 0 ? 'origin-left' : ''}
+                    `}
+                  >
+                    <motion.div
+                      whileHover={{ scale: 1.06 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <button className="self-start bg-green-600 text-white px-6 py-2 rounded-full font-base text-lg hover:bg-green-700 transition">
+                        {item.cta}
+                      </button>
+                    </motion.div>
                   </div>
                 </div>
               ) : item.src.includes('youtube.com') ? (
                 <VideoWithPoster url={item.src} poster={item.poster} />
               ) : (
                 <video
+                  className='destination-image'
                   poster={item.poster}
                   src={item.src}
                   autoPlay
@@ -486,7 +533,7 @@ const TourBlogSection = () => {
 // Main Home Component
 const Home = () => {
   return (
-    <div className="bg-white text-gray-800">
+    <div className="home-page">
       <ImageSlider />
       <HeroSection />
       <WhyChooseUs />

@@ -18,7 +18,7 @@ router.post('/register', async (req, res) => {
       return res.status(409).json({ message: 'Email already exises!' });
     }
 
-    const [check] = await query('SELECT * FROM users WHERE name = ?', [username]);
+    const [check] = await query('SELECT * FROM users WHERE username = ?', [username]);
     if (check.length > 0) {
       return res.status(409).json({ message: 'Username already exises!' });
     }
@@ -26,7 +26,7 @@ router.post('/register', async (req, res) => {
     const hashedPassword = await hash(password, 10);
 
     await query(
-      'INSERT INTO users (name, email, password, auth_provider) VALUES (?, ?, ?, ?)',
+      'INSERT INTO users (username, email, password, auth_provider) VALUES (?, ?, ?, ?)',
       [username, email, hashedPassword, 'local']
     );
 
@@ -42,7 +42,7 @@ router.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    const [rows] = await query('SELECT * FROM users WHERE name = ?', [username]);
+    const [rows] = await query('SELECT * FROM users WHERE username = ?', [username]);
 
     if (rows.length === 0) {
       return res.status(401).json({ message: 'NO EXISTING THAT ACCOUNT!' });
@@ -57,8 +57,11 @@ router.post('/login', async (req, res) => {
 
     res.json({
       message: 'LOGIN SUCESSFUL!',
-      username: user.name,       // hoặc user.username nếu cột là vậy
-      email: user.email          // giả sử cột trong DB là `email`
+      id: user.id,
+      username: user.username,
+      name: user.name,     // thêm trường name
+      email: user.email,
+      avatar: user.avatar ? `data:image/jpeg;base64,${Buffer.from(user.avatar).toString('base64')}` : null
     });
   } catch (err) {
     console.error(err);
@@ -75,7 +78,6 @@ router.get('/auth/google', (req, res) => {
   const redirectUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${GOOGLE_REDIRECT_URI}&response_type=code&scope=openid%20email%20profile`;
   res.redirect(redirectUrl);
 });
-
 router.get('/auth/google/callback', async (req, res) => {
   const { code } = req.query;
 
@@ -97,14 +99,26 @@ router.get('/auth/google/callback', async (req, res) => {
     const { email, name, picture: avatar } = userInfo.data;
 
     const [existing] = await query('SELECT * FROM users WHERE email = ?', [email]);
+    let userId;
 
     if (existing.length === 0) {
-      await query(
+      // Thêm user mới và lấy ID
+      const result = await query(
         'INSERT INTO users (username, name, email, password, auth_provider, avatar) VALUES (?, ?, ?, ?, ?, ?)',
         [name, null, email, null, 'Google', avatar]
       );
+      
+      // Lấy ID vừa insert, tùy database mà cách lấy khác nhau
+      // Ví dụ với MySQL:
+      const [rows] = await query('SELECT LAST_INSERT_ID() as id');
+      userId = rows[0].id;
+      
+      // Hoặc nếu result trả về trực tiếp ID:
+      // userId = result.insertId;
     } else {
       const user = existing[0];
+      userId = user.id; // Lấy ID từ user đã tồn tại
+      
       if (!user.auth_provider.includes('Google')) {
         const providers = new Set(user.auth_provider.split(',').filter(Boolean));
         providers.add('Google');
@@ -114,7 +128,7 @@ router.get('/auth/google/callback', async (req, res) => {
       }
     }
 
-    res.redirect(`http://localhost:3000/oauth-success?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatar)}&provider=Google`);
+    res.redirect(`http://localhost:3000/oauth-success?name=${encodeURIComponent(name)}&id=${encodeURIComponent(userId)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatar)}&provider=Google`);
 
   } catch (err) {
     console.error(err);
@@ -172,14 +186,24 @@ router.get('/auth/discord/callback', async (req, res) => {
 
     // Kiểm tra người dùng đã tồn tại hay chưa
     const [existing] = await query('SELECT * FROM users WHERE email = ?', [email]);
+    let userId;
 
     if (existing.length === 0) {
       await query(
         'INSERT INTO users (username, name, email, password, auth_provider, avatar) VALUES (?, ?, ?, ?, ?, ?)',
         [displayName, null, email, null, 'Discord', avatarUrl]
       );
+          // Lấy ID vừa insert, tùy database mà cách lấy khác nhau
+      // Ví dụ với MySQL:
+      const [rows] = await query('SELECT LAST_INSERT_ID() as id');
+      userId = rows[0].id;
+      
+      // Hoặc nếu result trả về trực tiếp ID:
+      // userId = result.insertId;
     } else {
       const user = existing[0];
+      userId = user.id; // Lấy ID từ user đã tồn tại
+
       if (!user.auth_provider.includes('Discord')) {
         const providers = new Set(user.auth_provider.split(',').filter(Boolean));
         providers.add('Discord');
@@ -189,7 +213,7 @@ router.get('/auth/discord/callback', async (req, res) => {
     }
 
     // Gửi thông tin về frontend
-    res.redirect(`http://localhost:3000/oauth-success?name=${encodeURIComponent(displayName)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatarUrl)}&provider=Discord`);
+    res.redirect(`http://localhost:3000/oauth-success?name=${encodeURIComponent(displayName)}&id=${encodeURIComponent(userId)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatarUrl)}&provider=Discord`);
 
   } catch (err) {
     console.error('Discord OAuth Error:', err);
@@ -245,6 +269,8 @@ router.get('/auth/github/callback', async (req, res) => {
 
     const [existing] = await query('SELECT * FROM users WHERE email = ?', [email]);
 
+    let userId;
+
     const displayName = name || login;
 
     if (existing.length === 0) {
@@ -252,8 +278,17 @@ router.get('/auth/github/callback', async (req, res) => {
         'INSERT INTO users (username, name, email, password, auth_provider, avatar) VALUES (?, ?, ?, ?, ?, ?)',
         [name, null, displayName, email, null, 'Github', avatar_url]
       );
+          // Lấy ID vừa insert, tùy database mà cách lấy khác nhau
+      // Ví dụ với MySQL:
+      const [rows] = await query('SELECT LAST_INSERT_ID() as id');
+      userId = rows[0].id;
+      
+      // Hoặc nếu result trả về trực tiếp ID:
+      // userId = result.insertId;
     } else {
       const user = existing[0];
+      userId = user.id; // Lấy ID từ user đã tồn tại
+
       if (!user.auth_provider.includes('Github')) {
         const providers = new Set(user.auth_provider.split(',').filter(Boolean));
         providers.add('Github');
@@ -262,7 +297,7 @@ router.get('/auth/github/callback', async (req, res) => {
       }
     }
 
-    res.redirect(`http://localhost:3000/oauth-success?name=${encodeURIComponent(displayName)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatar_url)}&provider=GitHub`);
+    res.redirect(`http://localhost:3000/oauth-success?name=${encodeURIComponent(displayName)}&id=${encodeURIComponent(userId)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatar_url)}&provider=GitHub`);
   } catch (err) {
     console.error('GitHub OAuth Error:', err);
     res.status(500).send('GitHub OAuth Error');
@@ -310,13 +345,24 @@ router.get('/auth/facebook/callback', async (req, res) => {
 
     const [existing] = await query('SELECT * FROM users WHERE email = ?', [email]);
 
+    let userId;
+
     if (existing.length === 0) {
       await query(
         'INSERT INTO users (username, name, email, password, auth_provider, avatar) VALUES (?, ?, ?, ?, ?, ?)',
         [name, null, email, null, 'Facebook', avatarUrl]
       );
+          // Lấy ID vừa insert, tùy database mà cách lấy khác nhau
+      // Ví dụ với MySQL:
+      const [rows] = await query('SELECT LAST_INSERT_ID() as id');
+      userId = rows[0].id;
+      
+      // Hoặc nếu result trả về trực tiếp ID:
+      // userId = result.insertId;
     } else {
       const user = existing[0];
+      userId = user.id; // Lấy ID từ user đã tồn tại
+
       if (!user.auth_provider.includes('Facebook')) {
         const providers = new Set(user.auth_provider.split(',').filter(Boolean));
         providers.add('Facebook');
@@ -325,7 +371,7 @@ router.get('/auth/facebook/callback', async (req, res) => {
       }
     }
 
-    res.redirect(`http://localhost:3000/oauth-success?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatarUrl)}&provider=Facebook`);
+    res.redirect(`http://localhost:3000/oauth-success?name=${encodeURIComponent(name)}&id=${encodeURIComponent(userId)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatarUrl)}&provider=Facebook`);
   } catch (err) {
     console.error('Facebook OAuth Error:', err);
     res.status(500).send('Facebook OAuth Error');

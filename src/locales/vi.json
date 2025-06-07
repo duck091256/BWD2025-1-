@@ -29,34 +29,78 @@
     "otherOption": "hoặc tiếp tục với các tài khoản mạng xã hội"
   },
   "home": {
-    "button": "Xem thêm",
-    "item1": {
-      "name": "HÀNH TRÌNH RỪNG HOANG",
-      "desc": "Đi bộ qua những cánh rừng nguyên sơ, hít thở không khí trong lành và kết nối lại với sự tĩnh lặng của thiên nhiên."
+    "firstSection": {
+      "button": "Xem thêm",
+      "item1": {
+        "name": "HÀNH TRÌNH RỪNG HOANG",
+        "desc": "Đi bộ qua những cánh rừng nguyên sơ, hít thở không khí trong lành và kết nối lại với sự tĩnh lặng của thiên nhiên."
+      },
+      "item2": {
+        "name": "TRỐN VỀ DÒNG SÔNG",
+        "desc": "Chèo thuyền trên những dòng sông yên bình, mỗi nhịp chèo đưa bạn gần hơn với nhịp đập của thiên nhiên."
+      },
+      "item3": {
+        "name": "LANG THANG THÁC NƯỚC",
+        "desc": "Khám phá những thác nước ẩn mình và tận hưởng vẻ đẹp của hành trình khám phá bền vững."
+      },
+      "item4": {
+        "name": "PHIÊU LƯU XE ĐẠP XANH",
+        "desc": "Đạp xe qua những ngọn đồi trập trùng, chỉ để lại dấu chân và mang về những kỷ niệm."
+      },
+      "item5": {
+        "name": "CẮM TRẠI DƯỚI SAO",
+        "desc": "Cắm trại dưới bầu trời đầy sao tại các địa điểm thân thiện với môi trường, nơi thiên nhiên là chủ nhà duy nhất."
+      },
+      "item6": {
+        "name": "ĐƯỜNG MÒN VEN BIỂN XANH",
+        "desc": "Khám phá các con đường ven biển với tác động tối thiểu, bảo tồn vẻ đẹp đại dương cho các thế hệ tương lai."
+      },
+      "item7": {
+        "name": "HÀNH TRÌNH SINH THÁI CỘNG ĐỒNG",
+        "desc": "Tham gia cùng cộng đồng địa phương trong hành trình du lịch bền vững, học cách họ bảo vệ trái đất."
+      }
     },
-    "item2": {
-      "name": "TRỐN VỀ DÒNG SÔNG",
-      "desc": "Chèo thuyền trên những dòng sông yên bình, mỗi nhịp chèo đưa bạn gần hơn với nhịp đập của thiên nhiên."
+    "secondSection": {
+      "title": "Khám phá Việt Nam Xanh",
+      "sub-title": "Trải nghiệm thiên nhiên nguyên sơ, văn hóa bản địa và hành trình du lịch bền vững.",
+      "button": "Khám phá ngay",
+      "title-img-1": "Pù Luông - Thanh Hóa",
+      "sub-title-img-1": "Ruộng bậc thang nối tiếp rừng núi xanh mát, bản làng dân tộc thân thiện - nơi lý tưởng để nghỉ dưỡng giữa thiên nhiên hoang sơ.",
+      "title-img-2": "Tràm Chim - Đồng Tháp",
+      "sub-title-img-2": "Khu rừng ngập nước nổi bật với hàng trăm loài chim quý, đưa du khách hòa mình vào hệ sinh thái đặc trưng miền Tây.",
+      "title-img-3": "Sapa - Lào Cai",
+      "sub-title-img-3": "Khí hậu mát mẻ quanh năm, cảnh sắc hùng vĩ với ruộng bậc thang và những cung đường trekking giữa núi rừng Tây Bắc.",
+      "title-img-4": "Cúc Phương - Ninh Bình",
+      "sub-title-img-4": "Vườn quốc gia đầu tiên của Việt Nam, nổi bật với rừng nguyên sinh, động vật quý hiếm và các tuyến tham quan sinh thái hấp dẫn."
     },
-    "item3": {
-      "name": "LANG THANG THÁC NƯỚC",
-      "desc": "Khám phá những thác nước ẩn mình và tận hưởng vẻ đẹp của hành trình khám phá bền vững."
+    "thirdSection": {
+      "title": "Lý Do Để Lựa Chọn Chúng Tôi",
+      "first-frame-title": "Đã Trải Nghiệm và Tin Tưởng",
+      "first-frame-sub-title": "Chúng tôi được tin tưởng bởi 20 triệu du khách khắp thế giới giống như bạn.",
+      "second-frame-title": "Hỗ Trợ Nhiệt Tình",
+      "second-frame-sub-title": "Chúng tôi ở đây vì bạn, bất kể khi nào bạn cần.",
+      "third-frame-title": "Đối Tác Du Lịch Toàn Diện",
+      "third-frame-sub-title": "Đồng hành cùng mọi hành trình của bạn. Đem đến cho bạn chuyến đi trọn vẹn!"
     },
-    "item4": {
-      "name": "PHIÊU LƯU XE ĐẠP XANH",
-      "desc": "Đạp xe qua những ngọn đồi trập trùng, chỉ để lại dấu chân và mang về những kỷ niệm."
+    "fourthSection": {
+      "title": "Trải nghiệm du lịch xanh tại Việt Nam",
+      "desc": "Cho dù bạn muốn thư giãn giữa thiên nhiên, tham gia các hoạt động ngoài trời, hay tìm hiểu văn hóa địa phương - du lịch xanh tại Việt Nam sẽ mang đến cho bạn trải nghiệm vừa thú vị vừa ý nghĩa. Từ những khu sinh thái ven rừng đến homestay thân thiện với môi trường, hành trình của bạn sẽ luôn hài hòa với thiên nhiên và cộng đồng.",
+      "button": "Đặt Ngay",
+      "iframe-1-title": "Làng Sinh Thái Núi Rừng",
+      "iframe-1-desc": "Trải nghiệm nghỉ dưỡng giữa đại ngàn",
+      "iframe-2-title": "Nông Trại Hữu Cơ",
+      "iframe-2-desc": "Tham quan, trồng rau, sống xanh mỗi ngày",
+      "iframe-3-title": "Homestay Ven Hồ",
+      "iframe-3-desc": "Bình yên giữa thiên nhiên nguyên sơ",
+      "iframe-4-title": "Tour Trải Nghiệm Cộng Đồng",
+      "iframe-4-desc": "Khám phá văn hóa - bảo vệ môi trường"
     },
-    "item5": {
-      "name": "CẮM TRẠI DƯỚI SAO",
-      "desc": "Cắm trại dưới bầu trời đầy sao tại các địa điểm thân thiện với môi trường, nơi thiên nhiên là chủ nhà duy nhất."
-    },
-    "item6": {
-      "name": "ĐƯỜNG MÒN VEN BIỂN XANH",
-      "desc": "Khám phá các con đường ven biển với tác động tối thiểu, bảo tồn vẻ đẹp đại dương cho các thế hệ tương lai."
-    },
-    "item7": {
-      "name": "HÀNH TRÌNH SINH THÁI CỘNG ĐỒNG",
-      "desc": "Tham gia cùng cộng đồng địa phương trong hành trình du lịch bền vững, học cách họ bảo vệ trái đất."
+    "fifthSection": {
+      "title": "Blog Tour Của Chúng Tôi",
+      "desc-1": "Trải nghiệm cuộc sống nông thôn Việt Nam khi tham gia thu hoạch chè cùng người dân địa phương. Đắm mình trong cảnh sắc thiên nhiên hùng vĩ và nhịp sống yên bình nơi vùng cao.",
+      "button-1": "Tìm hiểu thêm",
+      "desc-2": "Dạo bước trong không gian cổ kính, thưởng thức ánh đèn lồng lung linh và khám phá văn hóa truyền thống tại phố cổ Hội An - di sản văn hóa thế giới.",
+      "button-2": "Khám phá ngay"
     }
   },
   "nav": {

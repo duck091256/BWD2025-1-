@@ -116,6 +116,7 @@
 import { useRef, useState , useEffect} from "react";
 import { useTranslation } from 'react-i18next';
 import "../styles/ImageSlider.scss";
+import { motion } from 'framer-motion';
 import greenTraveling1 from "../assets/images/home/green-traveling-12.jpg";
 import greenTraveling2 from "../assets/images/home/green-traveling-13.jpg";
 import greenTraveling3 from "../assets/images/home/green-traveling-14.jpg";
@@ -158,44 +159,44 @@ const ImageSlider = () => {
     {
       id: 1,
       imgUrl: greenTraveling1,
-      desc: t(`home.item1.desc`),
-      name: t(`home.item1.name`),
+      desc: t(`home.firstSection.item1.desc`),
+      name: t(`home.firstSection.item1.name`),
     },
     {
       id: 2,
       imgUrl: greenTraveling2,
-      desc: t(`home.item2.desc`),
-      name: t(`home.item2.name`),
+      desc: t(`home.firstSection.item2.desc`),
+      name: t(`home.firstSection.item2.name`),
     },
     {
       id: 3,
       imgUrl: greenTraveling3,
-      desc: t(`home.item3.desc`),
-      name: t(`home.item3.name`),
+      desc: t(`home.firstSection.item3.desc`),
+      name: t(`home.firstSection.item3.name`),
     },
     {
       id: 4,
       imgUrl: greenTraveling4,
-      desc: t(`home.item4.desc`),
-      name: t(`home.item4.name`),
+      desc: t(`home.firstSection.item4.desc`),
+      name: t(`home.firstSection.item4.name`),
     },
     {
       id: 5,
       imgUrl: greenTraveling5,
-      desc: t(`home.item5.desc`),
-      name: t(`home.item5.name`),
+      desc: t(`home.firstSection.item5.desc`),
+      name: t(`home.firstSection.item5.name`),
     },
     {
       id: 6,
       imgUrl: greenTraveling6,
-      desc: t(`home.item6.desc`),
-      name: t(`home.item6.name`),
+      desc: t(`home.firstSection.item6.desc`),
+      name: t(`home.firstSection.item6.name`),
     },
     {
       id: 7,
       imgUrl: greenTraveling7,
-      desc: t(`home.item7.desc`),
-      name: t(`home.item7.name`),
+      desc: t(`home.firstSection.item7.desc`),
+      name: t(`home.firstSection.item7.name`),
     },
   ];
 
@@ -214,18 +215,18 @@ const ImageSlider = () => {
               <div className="slider-content">
                 <div className="name">{item.name}</div>
                 <div className="des">{item.desc}</div>
-                <button>{t(`home.button`)}</button>
+                <button>{t(`home.firstSection.button`)}</button>
               </div>
             </div>
           ))}
         </div>
         <div className="slider-buttons">
-          <button id="prev" onClick={handleClickNext}>
+          <motion.button id="prev" onClick={handleClickNext} whileHover={{ scale: 1.06 }} transition={{ duration: 0.3 }}>
             <i className="fa-solid fa-angle-left"></i>
-          </button>
-          <button id="next" onClick={handleClickPrev}>
+          </motion.button>
+          <motion.button id="next" onClick={handleClickPrev} whileHover={{ scale: 1.06 }} transition={{ duration: 0.3 }}>
             <i className="fa-solid fa-angle-right"></i>
-          </button>
+          </motion.button>
         </div>
       </div>
     </div>

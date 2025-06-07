@@ -15,6 +15,9 @@ import OAuthSuccess from '../pages/OAuthSuccess';
 import Profile from '../components/Profile';
 import Settings from '../components/Settings';
 import ScrollToTop from '../components/ScrollToTop';
+import PostDetail from '../components/PostDetail';
+import ProductDetail from '../components/ProductDetail';
+import Cart from '../components/Cart';
 import i18n from '../i18n';
 import { UserProvider } from '../context/UserContext';
 
@@ -50,12 +53,16 @@ function BodyClassManager() {
 }
 
 function AppContent() {
-
+  const location = useLocation();
+  
   useEffect(() => {
     const savedLang = localStorage.getItem("appLanguage") || "en";
     document.body.classList.remove("lang-en", "lang-vi");
     document.body.classList.add(`lang-${savedLang}`);
   }, []);
+
+  // Kiểm tra nếu đường dẫn là /cart hoặc bắt đầu bằng /product-detail
+  const hideFooter = location.pathname === '/cart' || location.pathname.startsWith('/product-detail');
 
   return (
     <>
@@ -76,11 +83,14 @@ function AppContent() {
             <Route path="/oauth-success" element={<OAuthSuccess />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/post/:id" element={<PostDetail />} />
+            <Route path="/product-detail/:id" element={<ProductDetail />} />
+            <Route path="/cart" element={<Cart />} />
           </Routes>
         </div>
       </div>
 
-      <Footer />
+      {!hideFooter && <Footer />}
     </>
   );
 }

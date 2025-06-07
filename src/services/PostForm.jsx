@@ -1,43 +1,79 @@
 import React, { useState, useRef } from 'react';
 import '../styles/news.scss';
+import { useContext } from 'react';
+import { UserContext } from '../context/UserContext';
 
 const PostForm = ({ onPostSubmit, onClose }) => {
+  const { user: localUser } = useContext(UserContext);
+  
   const [content, setContent] = useState('');
   const [images, setImages] = useState([]);
+  const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef(null);
 
-  const handleImageChange = (e) => {
-    if (e.target.files) {
-      const filesArray = Array.from(e.target.files).map(file => URL.createObjectURL(file));
-      setImages(prev => [...prev, ...filesArray]);
-    }
-  };
+  const handleImageChange = async (e) => {
+    const files = Array.from(e.target.files);
+    setIsUploading(true);
 
-  const removeImage = (index) => {
-    setImages(prev => prev.filter((_, i) => i !== index));
+    for (let file of files) {
+      const formData = new FormData();
+      formData.append('image', file);
+
+      try {
+        const res = await fetch('http://localhost:5000/api/upload/image', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          setImages((prev) => [...prev, data.url]); // URL ảnh dạng: /uploads/xyz.jpg
+        } else {
+          alert('Upload ảnh thất bại');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Lỗi khi upload ảnh');
+      }
+    }
+
+    setIsUploading(false);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!content.trim() && images.length === 0) return;
 
-    onPostSubmit({ content, images });
-    setContent('');
-    setImages([]);
+    if (!localUser) {
+      alert('Chưa đăng nhập');
+      return;
+    }
+
+    const postData = {
+      content,
+      images,
+      authorId: localUser.id,
+      author: localUser.name || localUser.username,
+      authorAvatar: localUser.avatar,
+    };
+
+    if (typeof onPostSubmit === 'function') {
+      onPostSubmit(postData);
+    } else {
+      console.error('onPostSubmit không được truyền hoặc không phải là hàm');
+    }
+
     onClose();
   };
 
+  const removeImage = (index) => {
+    setImages((prev) => prev.filter((_, i) => i !== index));
+  };
+
   return (
-    <div className='post-creator-popup'>
+    <form onSubmit={handleSubmit} className='post-creator-popup'>
       <div className='post-creator-header'>
         <h3>Tạo Bài Viết</h3>
-        <button 
-          className='close-btn' 
-          onClick={onClose}
-          aria-label='Đóng'
-        >
-          &times;
-        </button>
+        <button className='close-btn' type='button' onClick={onClose}>&times;</button>
       </div>
 
       <div className='post-creator-body'>
@@ -53,46 +89,36 @@ const PostForm = ({ onPostSubmit, onClose }) => {
       <div className='image-preview-container'>
         {images.map((img, index) => (
           <div key={index} className='image-preview-item'>
-            <img src={img} alt={`preview ${index}`} />
-            <button
-              onClick={() => removeImage(index)}
-              className='remove-image-btn'
-            >
-              &times;
-            </button>
+            <img src={`http://localhost:5000${img}`} alt={`preview ${index}`} />
+            <button type='button' onClick={() => removeImage(index)} className='remove-image-btn'>&times;</button>
           </div>
         ))}
       </div>
 
       <div className='post-creator-footer'>
         <div className='attachment-options'>
-          <button
-            type='button'
-            onClick={() => fileInputRef.current.click()}
-            className='add-photo-btn'
-          >
-            📷 Ảnh/Video
+          <button type='button' onClick={() => fileInputRef.current.click()} className='add-photo-btn'>
+            📷 Ảnh
           </button>
           <input
             type='file'
             ref={fileInputRef}
             onChange={handleImageChange}
             multiple
-            accept='image/*,video/*'
+            accept='image/*'
             style={{ display: 'none' }}
           />
         </div>
 
         <button
           type='submit'
-          onClick={handleSubmit}
           className='post-submit-btn'
-          disabled={!content.trim() && images.length === 0}
+          disabled={isUploading || (!content.trim() && images.length === 0)}
         >
-          Đăng
+          {isUploading ? 'Đang tải ảnh...' : 'Đăng'}
         </button>
       </div>
-    </div>
+    </form>
   );
 };
 

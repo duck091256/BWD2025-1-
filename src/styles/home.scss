@@ -2,7 +2,7 @@ html {
   scroll-behavior: smooth;
 }
 
-section,
+section.section-home,
 div#hero {
   scroll-margin-top: 80px;
   padding: 3rem;
@@ -67,20 +67,17 @@ div#hero {
       bottom: 0;
       left: 0;
       right: 0;
-      background: rgba(255, 255, 255, 0.7);
       padding: 1rem;
       transform: translateY(0);
 
       .tag-title {
         font-size: 1.3rem;
         font-weight: bold;
-        color: #2c3e50;
         margin-bottom: 0.5rem;
       }
 
       .tag-desc {
         font-size: 0.9rem;
-        color: #7f8c8d;
         line-height: 1.4;
       }
     }

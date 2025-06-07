@@ -10,70 +10,70 @@ const PRODUCTS = [
     name: 'Kính thời trang',
     price: 45900,
     colors: ['Đen', 'Xám', 'Nâu'],
-    image: require('../assets/images/products/product1.webp')
+    image: require('../assets/images/products/product1.png')
   },
   {
     id: 2,
     name: 'Bình nước inox',
     price: 150000,
     colors: ['Navy', 'Đen', 'Đỏ'],
-    image:  require('../assets/images/products/product2.webp')
+    image: require('../assets/images/products/product2.png')
   },
   {
     id: 3,
     name: 'Giỏ dã ngoại',
     price: 250000,
     colors: ['Hồng', 'Vàng', 'Xanh lá'],
-    image:  require('../assets/images/products/product3.webp')
+    image: require('../assets/images/products/product3.png')
   },
   {
     id: 4,
     name: 'Kem chống nắng',
     price: 120000,
     colors: ['Xanh lá', 'Hồng', 'Xanh'],
-    image:  require('../assets/images/products/product4.webp')
+    image: require('../assets/images/products/product4.png')
   },
   {
     id: 5,
     name: 'Khăn tắm sợi tre',
     price: 80000,
     colors: ['Xanh', 'Cam', 'Hồng'],
-    image:  require('../assets/images/products/product5.webp')
+    image: require('../assets/images/products/product5.png')
   },
   {
     id: 6,
     name: 'Túi đan thủ công',
     price: 100000,
     colors: ['Đỏ', 'Be', 'Kaki'],
-    image:  require('../assets/images/products/product6.webp')
+    image: require('../assets/images/products/product6.png')
   },
   {
     id: 7,
     name: 'Thảm picnic',
     price: 200000,
     colors: ['Vàng', 'Hồng', 'Xanh'],
-    image:  require('../assets/images/products/product7.webp')
+    image: require('../assets/images/products/product7.png')
   },
   {
     id: 8,
     name: 'Đèn pin năng lượng mặt trời',
     price: 250000,
     colors: ['Xanh lá', 'Đen', 'Vàng'],
-    image: require('../assets/images/products/product8.webp')
+    image: require('../assets/images/products/product8.png')
   },
   {
     id: 9,
     name: 'Balo du lịch',
     price: 500000,
     colors: ['Đen', 'Xanh', 'Xám'],
-    image: require('../assets/images/products/product9.webp')
+    image: require('../assets/images/products/product9.png')
   },
   {
     id: 10,
     name: 'Nón du lịch',
     price: 50000,
     colors: ['Be', 'Trắng', 'Cà phê'],
-    image: require('../assets/images/products/product10.webp')
+    image: require('../assets/images/products/product10.png')
   },
 ];
 
@@ -158,71 +158,101 @@ const Products = () => {
 
       {/* Modal */}
       {modalProduct && (
-        <div className="modal" onClick={() => setModalProduct(null)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <span className="close-button" onClick={() => setModalProduct(null)}>&times;</span>
-            <h2>Mua Ngay</h2>
-            <p id="current-price">Giá: {modalProduct.price.toLocaleString('vi-VN')} VND</p>
-            <form onSubmit={handleFormSubmit} id="buy-now-form">
-              <label>Chọn Màu:</label>
-              <select
-                value={formData.color}
-                onChange={(e) => setFormData({ ...formData, color: e.target.value })}
-                required
+        <div className="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={() => setModalProduct(null)}>
+          <div className="modal-content bg-white rounded-lg p-6 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
+            <span className="close-button absolute top-4 right-4 text-2xl cursor-pointer hover:text-gray-600" onClick={() => setModalProduct(null)}>
+              &times;
+            </span>
+
+            <h2 className="text-xl font-bold mb-4">Mua Ngay</h2>
+            <p id="current-price" className="text-lg font-semibold mb-6">Giá: {modalProduct.price.toLocaleString('vi-VN')} VND</p>
+
+            <form onSubmit={handleFormSubmit} className="buy-now-form space-y-4">
+              <div className="cart-input-group">
+                <label className="block mb-2 font-medium">Chọn Màu:</label>
+                <select
+                  className="cart-input w-full p-2 border rounded"
+                  value={formData.color}
+                  onChange={(e) => setFormData({ ...formData, color: e.target.value })}
+                  required
+                >
+                  <option value="">Chọn màu</option>
+                  {modalProduct.colors.map((c) => (
+                    <option key={c} value={c}>{c}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="cart-input-group">
+                <label className="block mb-2 font-medium">Chọn Size:</label>
+                <select
+                  className="cart-input w-full p-2 border rounded"
+                  value={formData.size}
+                  onChange={(e) => setFormData({ ...formData, size: e.target.value })}
+                  required
+                >
+                  <option value="">Chọn size</option>
+                  {['S', 'M', 'L', 'XL'].map((size) => (
+                    <option key={size} value={size}>{size}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="cart-input-group">
+                <label className="block mb-2 font-medium">Số lượng:</label>
+                <input
+                  className="cart-input w-full p-2 border rounded"
+                  type="number"
+                  min="1"
+                  value={formData.quantity}
+                  onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
+                  required
+                />
+              </div>
+
+              <div className="cart-input-group">
+                <label className="cart-label block mb-2 font-medium">Họ và Tên:</label>
+                <input
+                  className="cart-input w-full p-2 border rounded"
+                  type="text"
+                  value={formData.name}
+                  placeholder="Nhập họ và tên"
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  required
+                />
+              </div>
+
+              <div className="cart-input-group">
+                <label className="cart-label block mb-2 font-medium">Địa Chỉ:</label>
+                <input
+                  className="cart-input w-full p-2 border rounded"
+                  type="text"
+                  value={formData.address}
+                  placeholder="Nhập địa chỉ"
+                  onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                  required
+                />
+              </div>
+
+              <div className="cart-input-group">
+                <label className="cart-label block mb-2 font-medium">Số Điện Thoại:</label>
+                <input
+                  className="cart-input w-full p-2 border rounded"
+                  type="tel"
+                  pattern="0[0-9]{9}"
+                  value={formData.phone}
+                  placeholder="Nhập số điện thoại"
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-2 px-4 rounded font-medium transition-colors"
               >
-                <option value="">Chọn màu</option>
-                {modalProduct.colors.map((c) => (
-                  <option key={c} value={c}>{c}</option>
-                ))}
-              </select>
-
-              <label>Chọn Size:</label>
-              <select
-                value={formData.size}
-                onChange={(e) => setFormData({ ...formData, size: e.target.value })}
-                required
-              >
-                <option value="">Chọn size</option>
-                {['S', 'M', 'L', 'XL'].map((size) => (
-                  <option key={size} value={size}>{size}</option>
-                ))}
-              </select>
-
-              <label>Số lượng:</label>
-              <input
-                type="number"
-                min="1"
-                value={formData.quantity}
-                onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
-                required
-              />
-
-              <label>Họ và Tên:</label>
-              <input
-                type="text"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                required
-              />
-
-              <label>Địa Chỉ:</label>
-              <input
-                type="text"
-                value={formData.address}
-                onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                required
-              />
-
-              <label>Số Điện Thoại:</label>
-              <input
-                type="tel"
-                pattern="0[0-9]{9}"
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                required
-              />
-
-              <button type="submit">Mua</button>
+                Mua
+              </button>
             </form>
           </div>
         </div>

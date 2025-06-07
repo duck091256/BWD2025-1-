@@ -92,7 +92,7 @@ const Profile = () => {
             <img
               src={user.avatar}
               alt="avatar"
-              style={{ width: 100, borderRadius: '50%', marginBottom: 10 }}
+              style={{ width: 100, height: 100, borderRadius: '50%', marginBottom: 10 }}
             />
           </div>
           <div className="upload">{t('profile.upload')}</div>

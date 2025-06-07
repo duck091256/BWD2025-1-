@@ -60,6 +60,108 @@ body.light-mode {
       color: #DB4437;
     }
   }
+
+  .home-page {
+    .home-odd-floor {
+      background-color: #d1fae5;
+    }
+
+    .home-even-floor {
+      background-color: #fff;
+    }
+
+    .title {
+      color: #1f2937;
+    }
+
+    .sub-title {
+      color: #4b5563;
+    }
+
+    .image-gallery-container {
+      .tag {
+        background: rgba(255, 255, 255, 0.7);
+      }
+
+      .tag-title {
+        color: #2c3e50;
+      }
+
+      .tag-desc {
+        color: #4b5563;
+      }
+    }
+  }
+
+  // Travel Page
+  .nice-place,
+  .tour-summer {
+    background-color: #d6e6f5;
+
+    .tour-summer-content-item {
+      background-color: #fff;
+    }
+  }
+
+  .service-item {
+    background: #e1ffe5;
+    box-shadow: 0 1px 8px #185a9d;
+
+    &:hover {
+      box-shadow: 0 2px 12px #165da5;
+      background: #cefcce;
+      transform: translateY(-6px) scale(1.03);
+    }
+  }
+
+  .about,
+  .review {
+    background-color: #fff;
+  }
+
+  .products-page {
+    .item {
+      background-color: #fff;
+    }
+  }
+
+  .product-detail {
+    background-color: rgba(255, 255, 255, 0.8);
+
+    .quantity-control button {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .quantity-control input {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .modal-product-detail-content {
+      background-color: rgba(255, 255, 255, 1);
+
+      .cart-label {
+        color: #374151;
+      }
+    }
+  }
+
+  .cart-container {
+    background-color: rgba(255, 255, 255, 0.8);
+
+    .modal-cart-content {
+      background-color: rgba(255, 255, 255, 1);
+
+      .cart-label {
+        color: #374151;
+      }
+    }
+  }
+
+  .detail {
+    h2 {
+      color: #333;
+    }
+  }
 }
 
 body.dark-mode {
@@ -207,6 +309,224 @@ body.dark-mode {
   .sidebar-links {
     a {
       color: #BAC5FF;
+    }
+  }
+
+  .home-page {
+
+    #prev,
+    #next {
+      background-color: rgba(0, 0, 0, 0.5);
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    .home-odd-floor {
+      background-color: #131C20;
+    }
+
+    .home-even-floor {
+      background-color: #11191D;
+    }
+
+    .title {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .sub-title {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .image-gallery-container {
+      .tag {
+        background: rgba(0, 0, 0, 0.5);
+      }
+
+      .tag-title {
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .tag-desc {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+
+    .destination-image {
+      opacity: 90%;
+    }
+  }
+
+  // Travel Page
+  .nice-place,
+  .tour-summer {
+    background-color: #1a2733;
+
+    .tour-summer-content-item {
+      background-color: #111827;
+    }
+  }
+
+  .service-item {
+    background: #225a43;
+    box-shadow: 0 1px 8px #0f4a74;
+
+    &:hover {
+      background: #317156;
+      box-shadow: 0 2px 12px #0d5a8a;
+    }
+
+    p {
+      color: #b8ffcd; // nhẹ, nổi bật trên nền tối
+    }
+  }
+
+  .about,
+  .review {
+    background-color: #111827;
+  }
+
+  .products-page {
+    .item {
+      background-color: #fff;
+    }
+  }
+
+  .products-page {
+    #search-input {
+      background-color: #131C20;
+    }
+
+    .item {
+      background-color: #11191D;
+    }
+
+    .detail {
+      h2 {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+
+    .modal-content {
+      background-color: #11191D;
+
+      .cart-input {
+        background-color: #1e272b;
+      }
+    }
+  }
+
+  .product-detail {
+    background-color: #11191D;
+
+    .quantity-control button {
+      background-color: #11191D;
+    }
+
+    .quantity-control input {
+      background-color: #11191D;
+    }
+
+    .modal-product-detail-content {
+      background-color: #11191D;
+
+      .cart-input {
+        background-color: #1e272b;
+      }
+    }
+  }
+
+  .cart-container {
+    background-color: #11191D;
+
+    .cart-table td {
+      input {
+        background-color: #11191D;
+      }
+    }
+
+    .modal-cart-content {
+      background-color: #11191D;
+
+      .cart-input {
+        background-color: #1e272b;
+      }
+    }
+  }
+
+  .news-container {
+    .create-post-box {
+      background-color: #11191D;
+
+      .create-post-input {
+        color: rgba(255, 255, 255, 0.8);
+        background-color: #1e272b;
+      }
+    }
+
+    .modal-overlay {
+      .post-creator-popup {
+        background-color: #11191D;
+
+        .post-creator-body textarea {
+          background-color: #1e272b;
+        }
+
+        .post-creator-footer .attachment-options .add-photo-btn {
+          background-color: #232b2f;
+        }
+      }
+    }
+
+    .post-list {
+      .post {
+        background-color: #11191D;
+
+        .share-popup {
+          background-color: #11191D;
+
+          .share-option {
+            background-color: #1e272b;
+
+            &:hover {
+              background-color: #323f45;
+            }
+          }
+        }
+      }
+
+      .post-content {
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .post-actions {
+        button {
+          color: rgba(255, 255, 255, 0.8);
+
+          &:hover {
+            background-color: #1e272b;
+          }
+        }
+      }
+
+      .post-comments {
+        .comment-input {
+          background-color: #1e272b;
+        }
+
+        .comment-content-wrapper {
+          background-color: #232b2f;
+
+          .comment-author {
+            color: #fff;
+          }
+
+          .comment-content {
+            color: rgba(255, 255, 255, 0.8);
+          }
+        }
+      }
     }
   }
 }

@@ -15,37 +15,81 @@
     "failMessage1": "Try resetting your password!",
     "failMessage2": "Incorrect password. Please try again!",
     "failMessage3": "Login failed!",
-    "successMessage": "Welcome back! You’re now logged in."
+    "successMessage": "Welcome back! You're now logged in."
   },
   "home": {
-    "button": "See more",
-    "item1": {
-      "name": "WILD FOREST JOURNEY",
-      "desc": "Hike through untouched forests, breathe the fresh air, and reconnect with nature’s serenity."
+    "firstSection": {
+      "button": "See more",
+      "item1": {
+        "name": "WILD FOREST JOURNEY",
+        "desc": "Hike through untouched forests, breathe the fresh air, and reconnect with nature's serenity."
+      },
+      "item2": {
+        "name": "RIVER ESCAPE",
+        "desc": "Paddle along tranquil rivers, where every stroke brings you closer to nature's heartbeat."
+      },
+      "item3": {
+        "name": "WATERFALL WANDER",
+        "desc": "Discover hidden waterfalls and embrace the beauty of sustainable exploration."
+      },
+      "item4": {
+        "name": "ECO BIKE ADVENTURE",
+        "desc": "Cycle through rolling hills, leaving only footprints and taking only memories."
+      },
+      "item5": {
+        "name": "STARLIT CAMPING",
+        "desc": "Camp under the stars in eco-friendly sites, where nature is your only host."
+      },
+      "item6": {
+        "name": "COASTAL GREEN TRAIL",
+        "desc": "Explore coastal trails with minimal impact, preserving the ocean's beauty for generations."
+      },
+      "item7": {
+        "name": "COMMUNITY ECO TOUR",
+        "desc": "Join local communities in sustainable travel, learning their ways to protect the earth."
+      }
     },
-    "item2": {
-      "name": "RIVER ESCAPE",
-      "desc": "Paddle along tranquil rivers, where every stroke brings you closer to nature’s heartbeat."
+    "secondSection": {
+      "title": "Explore Green Vietnam",
+      "sub-title": "Experience pristine nature, local culture, and a journey of sustainable travel.",
+      "button": "Explore Now",
+      "title-img-1": "Pu Luong - Thanh Hoa",
+      "sub-title-img-1": "Terraced rice fields merging with lush forests and friendly ethnic villages - an ideal retreat in unspoiled nature.",
+      "title-img-2": "Tram Chim - Dong Thap",
+      "sub-title-img-2": "A vast wetland forest home to hundreds of rare bird species, immersing visitors in the rich ecosystem of the Mekong Delta.",
+      "title-img-3": "Sapa - Lao Cai",
+      "sub-title-img-3": "Cool climate year-round, breathtaking mountain views, terraced fields, and scenic trekking trails in Northwest Vietnam.",
+      "title-img-4": "Cuc Phuong - Ninh Binh",
+      "sub-title-img-4": "Vietnam's first national park, known for its untouched rainforest, rare wildlife, and captivating eco-tours through diverse ecosystems."
     },
-    "item3": {
-      "name": "WATERFALL WANDER",
-      "desc": "Discover hidden waterfalls and embrace the beauty of sustainable exploration."
+    "thirdSection": {
+      "title": "Reason For Choosing Us",
+      "first-frame-title": "Tried and Trusted",
+      "first-frame-sub-title": "We're trusted worldwide by 20 million travellers just like you.",
+      "second-frame-title": "Reliable Support",
+      "second-frame-sub-title": "We're here for you. Reach out anytime by phone, email, or chat.",
+      "third-frame-title": "One-stop Travel Partner",
+      "third-frame-sub-title": "Your search ends here. We've got your entire trip covered!"
     },
-    "item4": {
-      "name": "ECO BIKE ADVENTURE",
-      "desc": "Cycle through rolling hills, leaving only footprints and taking only memories."
+    "fourthSection": {
+      "title": "Experience Green Travel in Vietnam",
+      "desc": "Whether you're looking to unwind in nature, join outdoor activities, or explore local culture - green travel in Vietnam offers a journey that is both meaningful and memorable. From forest-edge eco-resorts to eco-friendly homestays, your adventure will always stay in harmony with nature and the community.",
+      "button": "Book Now",
+      "iframe-1-title": "Mountain Eco Village",
+      "iframe-1-desc": "A peaceful retreat nestled in the great highlands",
+      "iframe-2-title": "Organic Farm Stay",
+      "iframe-2-desc": "Explore, grow, and live green every day",
+      "iframe-3-title": "Lakeside Homestay",
+      "iframe-3-desc": "Serenity amidst untouched nature",
+      "iframe-4-title": "Community Adventure Tour",
+      "iframe-4-desc": "Discover culture - protect the environment"
     },
-    "item5": {
-      "name": "STARLIT CAMPING",
-      "desc": "Camp under the stars in eco-friendly sites, where nature is your only host."
-    },
-    "item6": {
-      "name": "COASTAL GREEN TRAIL",
-      "desc": "Explore coastal trails with minimal impact, preserving the ocean’s beauty for generations."
-    },
-    "item7": {
-      "name": "COMMUNITY ECO TOUR",
-      "desc": "Join local communities in sustainable travel, learning their ways to protect the earth."
+    "fifthSection": {
+      "title": "Our Tour Blog",
+      "desc-1": "Experience rural life in Vietnam by joining locals in tea harvesting. Immerse yourself in majestic nature and the peaceful rhythm of the highlands.",
+      "button-1": "Learn More",
+      "desc-2": "Stroll through the charming ancient town, enjoy shimmering lanterns, and explore the traditional culture of Hoi An - a UNESCO World Heritage site.",
+      "button-2": "Discover Now"
     }
   },
   "registerPage": {

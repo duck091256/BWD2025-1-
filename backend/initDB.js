@@ -1,3 +1,4 @@
+// initDB.js
 import mysql from 'mysql2/promise';
 
 const createDatabaseAndTables = async () => {
@@ -7,21 +8,21 @@ const createDatabaseAndTables = async () => {
     password: ''
   });
 
+  // Tạo DB nếu chưa có
   await connection.query(`CREATE DATABASE IF NOT EXISTS bwd CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci`);
   await connection.query(`USE bwd`);
 
   // users table
   await connection.query(`
     CREATE TABLE IF NOT EXISTS users (
-      id INT(11) NOT NULL AUTO_INCREMENT,
+      id INT AUTO_INCREMENT PRIMARY KEY,
       username VARCHAR(100) NOT NULL UNIQUE,
       name VARCHAR(100),
       email VARCHAR(100),
       password VARCHAR(255) DEFAULT NULL,
       auth_provider VARCHAR(50) DEFAULT 'local',
       avatar LONGBLOB,
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      PRIMARY KEY (id)
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
   `);
 
@@ -35,23 +36,12 @@ const createDatabaseAndTables = async () => {
       instagram_url VARCHAR(255),
       google_url VARCHAR(255),
       FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-    );
+    ) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
   `);
 
-  // trigger tạo profile tự động
-  await connection.query(`DROP TRIGGER IF EXISTS create_user_profile`);
+  // Đảm bảo mọi user đều có profile (1 lần duy nhất)
   await connection.query(`
-    CREATE TRIGGER create_user_profile
-    AFTER INSERT ON users
-    FOR EACH ROW
-    BEGIN
-      INSERT INTO user_profiles (user_id) VALUES (NEW.id);
-    END;
-  `);
-
-  // đảm bảo user_profiles đầy đủ cho user hiện có
-  await connection.query(`
-    INSERT INTO user_profiles (user_id)
+    INSERT IGNORE INTO user_profiles (user_id)
     SELECT id FROM users
     WHERE id NOT IN (SELECT user_id FROM user_profiles);
   `);
@@ -80,15 +70,11 @@ const createDatabaseAndTables = async () => {
       PRIMARY KEY (post_id, user_id),
       FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
       FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-    );
+    ) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
   `);
 
   console.log('✅ Database và các bảng đã được tạo thành công!');
   await connection.end();
 };
-
-createDatabaseAndTables().catch(err => {
-  console.error('❌ Lỗi khi tạo DB:', err);
-});
 
 export default createDatabaseAndTables;

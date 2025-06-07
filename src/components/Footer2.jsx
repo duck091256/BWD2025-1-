@@ -36,7 +36,7 @@ const members = [
 
 const Footer2 = () => {
   return (
-    <footer className="footer relative h-[300px]">
+    <footer className="footer relative h-[auto]">
       <div className="footer-members">
         {members.map((member, index) => (
           <div className="member" key={index}>

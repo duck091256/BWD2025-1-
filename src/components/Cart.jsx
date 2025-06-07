@@ -16,7 +16,7 @@ const Cart = () => {
     // Chuyển giá về số nếu chưa phải số (phòng trường hợp lưu chuỗi)
     const parsedCart = savedCart.map(item => ({
       ...item,
-      price: typeof item.price === 'string' ? parseInt(item.price.replace(/[₫\.\,]/g, ''), 10) : item.price,
+      price: typeof item.price === 'string' ? parseInt(item.price.replace(/[₫]/g, ''), 10) : item.price,
       quantity: item.quantity || 1,
     }));
     setCart(parsedCart);
@@ -89,7 +89,7 @@ const Cart = () => {
     }
 
     // Tạo nội dung chi tiết sản phẩm
-    const productDetails = productsToOrder.map(item => 
+    const productDetails = productsToOrder.map(item =>
       `- Tên sản phẩm: ${item.name}\n` +
       `- Giá: ${item.price}\n` +
       `- Kích thước: ${item.size}\n` +
@@ -157,7 +157,9 @@ const Cart = () => {
                     display: 'inline-block',
                     borderRadius: '50%',
                     border: '1px solid #ccc',
-                    marginLeft: 5
+                    marginLeft: 5,
+                    verticalAlign: 'middle', // 👈 Căn giữa theo dòng chữ
+                    marginBottom: 5
                   }}
                 ></span>
               </td>
@@ -190,34 +192,77 @@ const Cart = () => {
 
       {/* Modal */}
       {modalOpen && (
-        <div className="modal" onClick={() => setModalOpen(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <span className="close-button" onClick={() => setModalOpen(false)}>&times;</span>
-            <h2>Thông Tin Đặt Hàng</h2>
-            <form onSubmit={handleSubmitOrder}>
-              <label>Họ và Tên:</label>
-              <input
-                type="text"
-                required
-                value={buyerInfo.name}
-                onChange={(e) => setBuyerInfo({ ...buyerInfo, name: e.target.value })}
-              />
-              <label>Địa Chỉ:</label>
-              <input
-                type="text"
-                required
-                value={buyerInfo.address}
-                onChange={(e) => setBuyerInfo({ ...buyerInfo, address: e.target.value })}
-              />
-              <label>Số Điện Thoại:</label>
-              <input
-                type="tel"
-                pattern="0[0-9]{9}"
-                required
-                value={buyerInfo.phone}
-                onChange={(e) => setBuyerInfo({ ...buyerInfo, phone: e.target.value })}
-              />
-              <button type="submit">Đặt Hàng</button>
+        <div
+          className="modal-cart-container fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          onClick={() => setModalOpen(false)}
+        >
+          <div
+            className="modal-cart-content rounded-lg shadow-xl w-full max-w-md overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="flex justify-between items-center p-4 border-b">
+              <h2 className="text-xl font-bold">Thông Tin Đặt Hàng</h2>
+              <button
+                className="text-gray-500 hover:text-gray-700 text-2xl"
+                onClick={() => setModalOpen(false)}
+              >
+                &times;
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <form onSubmit={handleSubmitOrder} className="p-6">
+              <div className="mb-4">
+                <label className="cart-label block text-sm font-medium mb-2">
+                  Họ và Tên:
+                </label>
+                <input
+                  type="text"
+                  required
+                  className="cart-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  value={buyerInfo.name}
+                  placeholder="Nhập họ và tên"
+                  onChange={(e) => setBuyerInfo({ ...buyerInfo, name: e.target.value })}
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="cart-label block text-sm font-medium mb-2">
+                  Địa Chỉ:
+                </label>
+                <input
+                  type="text"
+                  required
+                  className="cart-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  value={buyerInfo.address}
+                  placeholder="Nhập địa chỉ"
+                  onChange={(e) => setBuyerInfo({ ...buyerInfo, address: e.target.value })}
+                />
+              </div>
+
+              <div className="mb-6">
+                <label className="cart-label block text-sm font-medium mb-2">
+                  Số Điện Thoại:
+                </label>
+                <input
+                  type="tel"
+                  pattern="0[0-9]{9}"
+                  required
+                  className="cart-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  value={buyerInfo.phone}
+                  placeholder="Nhập số điện thoại"
+                  onChange={(e) => setBuyerInfo({ ...buyerInfo, phone: e.target.value })}
+                />
+                <p className="text-xs text-gray-500 mt-1">Ví dụ: 0912345678</p>
+              </div>
+
+              <button
+                type="submit"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-300"
+              >
+                Đặt Hàng
+              </button>
             </form>
           </div>
         </div>

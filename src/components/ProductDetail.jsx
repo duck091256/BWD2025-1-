@@ -10,9 +10,9 @@ const productData = [
     price: { current: '₫45.900', old: '₫90.000', discount: '-50%' },
     description: 'Kính thời trang, bảo vệ mắt khỏi ánh nắng mặt trời.',
     images: [
-      '../assets/images/products/product1.webp',
-      '../assets/images/products/product1-1.webp',
-      '../assets/images/products/product1-2.jpg'
+      '../img/product1.png',
+      '../img/product1-1.png',
+      '../img/product1-2.png'
     ],
     options: { colors: ['Đen', 'Xám', 'Nâu'] },
   },
@@ -22,9 +22,9 @@ const productData = [
     price: { current: '₫150.000', old: '₫200.000', discount: '-25%' },
     description: 'Bình nước inox giữ nhiệt, dung tích 500ml.',
     images: [
-      '../assets/images/products/product2.webp',
-      '../assets/images/products/product2-1.webp',
-      '../assets/images/products/product2-2.webp'
+      '../img/product2.png',
+      '../img/product2-1.png',
+      '../img/product2-2.png'
     ],
     options: { colors: ['Navy', 'Đen', 'Đỏ'] },
   },
@@ -34,21 +34,21 @@ const productData = [
     price: { current: '₫250.000', old: '₫300.000', discount: '-17%' },
     description: "Giỏ dã ngoại dung tích lớn, dễ dàng mang theo.",
     images: [
-      '../assets/images/products/product3.webp',
-      '../assets/images/products/product3-1.webp',
-      '../assets/images/products/product3-2.webp'
+      '../img/product3.png',
+      '../img/product3-1.png',
+      '../img/product3-2.png'
     ],
     options: { colors: ['Hồng', 'Vàng', 'Xanh lá'] },
   },
   {
     id: '4',
-    name: 'Kem chống nắng',  
+    name: 'Kem chống nắng',
     price: { current: '₫120.000', old: '₫150.000', discount: '-20%' },
     description: 'Kem chống nắng SPF 50+, bảo vệ da khỏi tác hại của ánh nắng mặt trời.',
     images: [
-      '../assets/images/products/product4.webp',
-      '../assets/images/products/product4-1.webp',
-      '../assets/images/products/product4-2.webp'
+      '../img/product4.png',
+      '../img/product4-1.png',
+      '../img/product4-2.png'
     ],
     options: { colors: ['Xanh lá', 'Hồng', 'Xanh'] },
   },
@@ -58,9 +58,9 @@ const productData = [
     price: { current: '₫80.000', old: '₫100.000', discount: '-20%' },
     description: 'Khăn tắm sợi tre mềm mại, thấm hút tốt.',
     images: [
-      '../assets/images/products/product5.webp',
-      '../assets/images/products/product5-1.webp',
-      '../assets/images/products/product5-2.webp'
+      '../img/product5.png',
+      '../img/product5-1.png',
+      '../img/product5-2.png'
     ],
     options: { colors: ['Xanh', 'Cam', 'Hồng'] },
   },
@@ -71,9 +71,9 @@ const productData = [
     price: { current: '₫100.000', old: '₫150.000', discount: '-14%' },
     description: 'Túi đan thủ công, phong cách vintage.',
     images: [
-      '../assets/images/products/product6.webp',
-      '../assets/images/products/product6-1.webp',
-      '../assets/images/products/product6-2.webp'
+      '../img/product6.png',
+      '../img/product6-1.png',
+      '../img/product6-2.png'
     ],
     options: { colors: ['Đỏ', 'Be', 'Kaki'] },
   },
@@ -83,9 +83,9 @@ const productData = [
     price: { current: '₫200.000', old: '₫250.000', discount: '-20%' },
     description: 'Thảm picnic bằng vải tái chế, chống thấm nước, dễ dàng vệ sinh.',
     images: [
-      '../assets/images/products/product7.webp',
-      '../assets/images/products/product7-1.webp',
-      '../assets/images/products/product7-2.webp'
+      '../img/product7.png',
+      '../img/product7-1.png',
+      '../img/product7-2.png'
     ],
     options: { colors: ['Vàng', 'Hồng', 'Xanh'] },
   },
@@ -95,9 +95,9 @@ const productData = [
     price: { current: '₫250.000', old: '₫300.000', discount: '-17%' },
     description: 'Đèn pin năng lượng mặt trời, tiết kiệm điện năng.',
     images: [
-      '../assets/images/products/product8.webp',
-      '../assets/images/products/product8-1.webp',
-      '../assets/images/products/product8-2.webp'
+      '../img/product8.png',
+      '../img/product8-1.png',
+      '../img/product8-2.png'
     ],
     options: { colors: ['Xanh lá', 'Đen', 'Vàng'] },
   },
@@ -107,10 +107,10 @@ const productData = [
     price: { current: '₫500.000', old: '₫600.000', discount: '-17%' },
     description: 'Balo du lịch chống nước, dung tích lớn, phù hợp cho các chuyến đi dài ngày.',
     images: [
-      '../assets/images/products/product9.webp',
-      '../assets/images/products/product9-1.webp',
-      '../assets/images/products/product9-2.webp'
-    ], 
+      '../img/product9.png',
+      '../img/product9-1.png',
+      '../img/product9-2.png'
+    ],
     options: { colors: ['Đen', 'Xanh', 'Xám'] },
   },
   {
@@ -119,9 +119,9 @@ const productData = [
     price: { current: '₫50.000', old: '₫70.000', discount: '-17%' },
     description: 'Nón du lịch chống nắng, có thể gấp gọn lại dễ dàng.',
     images: [
-      '../assets/images/products/product10.webp',
-      '../assets/images/products/product10-1.webp',
-      '../assets/images/products/product10-2.webp'
+      '../img/product10.png',
+      '../img/product10-1.png',
+      '../img/product10-2.png'
     ],
     options: { colors: ['Be', 'Trắng', 'Cà phê'] },
   }
@@ -198,89 +198,148 @@ const ProductDetail = () => {
   };
 
   return (
-    <div className="container">
-      <div className="product-detail">
-        <div className="product-images">
-          <div className="main-image">
-            <img src={mainImage} alt="Hình ảnh sản phẩm" />
+    <div className="product-detail">
+      <div className="product-images">
+        <div className="main-image">
+          <img src={mainImage} alt="Hình ảnh sản phẩm" />
+        </div>
+        <div className="image-thumbnails">
+          {product.images.map((img, index) => (
+            <img key={index} className="thumbnail" src={img} alt={`Hình ảnh ${index + 1}`} onClick={() => setMainImage(img)} />
+          ))}
+        </div>
+      </div>
+
+      <div className="product-info">
+        <h1>{product.name}</h1>
+        <p className="product-description">{product.description}</p>
+        <div className="product-price">
+          <span className="current-price">{product.price.current}</span>
+          <span className="old-price">{product.price.old}</span>
+          <span className="discount">{product.price.discount}</span>
+        </div>
+
+        <div className="product-options">
+          <div className="option">
+            <label>Phân Loại Màu:</label>
+            <div className="choices">
+              {product.options.colors.map((color, index) => (
+                <button
+                  key={index}
+                  className={`choice color ${selectedColor === color ? 'selected' : ''}`}
+                  onClick={() => setSelectedColor(color)}
+                >
+                  {color}
+                </button>
+              ))}
+            </div>
           </div>
-          <div className="image-thumbnails">
-            {product.images.map((img, index) => (
-              <img key={index} className="thumbnail" src={img} alt={`Hình ảnh ${index + 1}`} onClick={() => setMainImage(img)} />
-            ))}
+
+          <div className="option">
+            <label>Phân Loại Size:</label>
+            <div className="choices">
+              {['S', 'M', 'L', 'XL'].map((size) => (
+                <button
+                  key={size}
+                  className={`choice size ${selectedSize === size ? 'selected' : ''}`}
+                  onClick={() => setSelectedSize(size)}
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className="product-info">
-          <h1>{product.name}</h1>
-          <p className="product-description">{product.description}</p>
-          <div className="product-price">
-            <span className="current-price">{product.price.current}</span>
-            <span className="old-price">{product.price.old}</span>
-            <span className="discount">{product.price.discount}</span>
+        <div className="quantity">
+          <label>Số Lượng:</label>
+          <div className="quantity-control">
+            <button onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>
+            <input type="number" value={quantity} onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))} />
+            <button onClick={() => setQuantity(quantity + 1)}>+</button>
           </div>
+        </div>
 
-          <div className="product-options">
-            <div className="option">
-              <label>Phân Loại Màu:</label>
-              <div className="choices">
-                {product.options.colors.map((color, index) => (
-                  <button
-                    key={index}
-                    className={`choice color ${selectedColor === color ? 'selected' : ''}`}
-                    onClick={() => setSelectedColor(color)}
-                  >
-                    {color}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="option">
-              <label>Phân Loại Size:</label>
-              <div className="choices">
-                {['S', 'M', 'L', 'XL'].map((size) => (
-                  <button
-                    key={size}
-                    className={`choice size ${selectedSize === size ? 'selected' : ''}`}
-                    onClick={() => setSelectedSize(size)}
-                  >
-                    {size}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="quantity">
-            <label>Số Lượng:</label>
-            <div className="quantity-control">
-              <button onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>
-              <input type="number" value={quantity} onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))} />
-              <button onClick={() => setQuantity(quantity + 1)}>+</button>
-            </div>
-          </div>
-
-          <div className="action-buttons">
-            <button className="add-cart" onClick={handleAddToCart}>Thêm Vào Giỏ Hàng</button>
-            <button className="buy-now" onClick={handleBuyNow}>Mua Ngay</button>
-          </div>
+        <div className="action-buttons">
+          <button className="add-cart" onClick={handleAddToCart}>Thêm Vào Giỏ Hàng</button>
+          <button className="buy-now" onClick={handleBuyNow}>Mua Ngay</button>
         </div>
       </div>
 
       {modalOpen && (
-        <div className="modal" onClick={() => setModalOpen(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <span className="close-button" onClick={() => setModalOpen(false)}>&times;</span>
-            <h2>Thông Tin Người Mua</h2>
-            <form onSubmit={handleSubmitOrder}>
-              <label>Họ và Tên:</label>
-              <input type="text" required value={buyerInfo.name} onChange={(e) => setBuyerInfo({ ...buyerInfo, name: e.target.value })} />
-              <label>Địa Chỉ:</label>
-              <input type="text" required value={buyerInfo.address} onChange={(e) => setBuyerInfo({ ...buyerInfo, address: e.target.value })} />
-              <label>Số Điện Thoại:</label>
-              <input type="tel" pattern="0[0-9]{9}" required value={buyerInfo.phone} onChange={(e) => setBuyerInfo({ ...buyerInfo, phone: e.target.value })} />
-              <button type="submit">Hoàn Thành Đặt Hàng</button>
+        <div
+          className="modal-product-detail-container fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 transition-opacity duration-300"
+          onClick={() => setModalOpen(false)}
+        >
+          <div
+            className="modal-product-detail-content rounded-xl shadow-2xl w-full max-w-md transform transition-all duration-300 scale-95 hover:scale-100"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="modal-header relative p-6 pb-0">
+              <button
+                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors text-2xl"
+                onClick={() => setModalOpen(false)}
+              >
+                &times;
+              </button>
+              <h2 className="text-2xl font-bold">Thông Tin Người Mua</h2>
+            </div>
+
+            {/* Modal Body */}
+            <form onSubmit={handleSubmitOrder} className="modal-body p-6 space-y-4">
+              <div className="card-input-group">
+                <label className="cart-label block text-sm font-medium mb-1">
+                  Họ và Tên <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  className="cart-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  value={buyerInfo.name}
+                  placeholder="Nhập họ và tên"
+                  onChange={(e) => setBuyerInfo({ ...buyerInfo, name: e.target.value })}
+                />
+              </div>
+
+              <div>
+                <label className="cart-label block text-sm font-medium mb-1">
+                  Địa Chỉ <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  className="cart-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  value={buyerInfo.address}
+                  placeholder="Nhập địa chỉ"
+                  onChange={(e) => setBuyerInfo({ ...buyerInfo, address: e.target.value })}
+                />
+              </div>
+
+              <div>
+                <label className="cart-label block text-sm font-medium mb-1">
+                  Số Điện Thoại <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="tel"
+                  pattern="0[0-9]{9}"
+                  required
+                  className="cart-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  value={buyerInfo.phone}
+                  placeholder="Nhập số điện thoại"
+                  onChange={(e) => setBuyerInfo({ ...buyerInfo, phone: e.target.value })}
+                />
+                <p className="mt-1 text-xs text-gray-500">Vui lòng nhập số điện thoại hợp lệ (ví dụ: 0912345678)</p>
+              </div>
+
+              <div className="pt-4">
+                <button
+                  type="submit"
+                  className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-medium py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+                >
+                  Hoàn Thành Đặt Hàng
+                </button>
+              </div>
             </form>
           </div>
         </div>

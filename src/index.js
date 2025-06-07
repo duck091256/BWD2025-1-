@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './views/App';
-import reportWebVitals from './reportWebVitals';
+import App from './views/App.jsx';
+import reportWebVitals from './reportWebVitals.js';
 import './styles/global.scss';
-import './i18n';
-import { ThemeProvider } from './context/ThemeContext';
+import './i18n.js';
+import { ThemeProvider } from './context/ThemeContext.jsx';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -110,6 +110,7 @@ function LoginPage() {
             setSucessMessage(t('loginPage.successMessage'));
 
             const localUser = {
+                id: data.id,
                 name: data.username || loginData.username,
                 email: data.email || '',
                 provider: 'local',

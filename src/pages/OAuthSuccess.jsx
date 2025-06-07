@@ -6,13 +6,15 @@ const OAuthSuccess = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const name = searchParams.get('name');
+        const   name = searchParams.get('name');
+        const id = searchParams.get('id');
         const email = searchParams.get('email');
         const avatar = searchParams.get('avatar');
         const provider = searchParams.get('provider');
 
         const user = {
             name,
+            id,
             email,
             avatar,
             provider
