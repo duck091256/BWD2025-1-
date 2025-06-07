@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkreactjs=self.webpackChunkreactjs||[]).push([[687],{7687:(e,t,c)=>{c.r(t);const r=document.querySelector(".login-register-container"),s=document.querySelector(".register-btn"),n=document.querySelector(".login-btn");s.addEventListener("click",(()=>{r.classList.add("active")})),n.addEventListener("click",(()=>{r.classList.remove("active")}))}}]);
+//# sourceMappingURL=687.df941af2.chunk.js.map
