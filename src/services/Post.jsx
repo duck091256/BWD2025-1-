@@ -4,6 +4,8 @@ import { FiShare } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
 const Post = ({ post, setPosts, currentUser }) => {
+  const API = process.env.REACT_APP_API_URL;
+
   const [comment, setComment] = useState('');
   const [showComments, setShowComments] = useState(false);
   const [showSharePopup, setShowSharePopup] = useState(false);
@@ -17,7 +19,7 @@ const Post = ({ post, setPosts, currentUser }) => {
     if (!currentUser) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/posts/${post.id}/like`, {
+      const res = await fetch(`${API}/api/posts/${post.id}/like`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: currentUser.id }),
@@ -63,7 +65,7 @@ const Post = ({ post, setPosts, currentUser }) => {
       authorAvatar: currentUser.avatar,
     };
 
-    const res = await fetch(`http://localhost:5000/api/posts/${post.id}/comment`, {
+    const res = await fetch(`${API}/api/posts/${post.id}/comment`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newComment),
@@ -132,7 +134,7 @@ const Post = ({ post, setPosts, currentUser }) => {
               <img
                 key={index}
                 src={img.startsWith('/uploads')
-                  ? `http://localhost:5000${img}`
+                  ? `${API}${img}`
                   : `data:image/png;base64,${img}`}
                 alt={`post-${post.id}-${index}`}
                 style={{ maxWidth: '100%', borderRadius: '8px' }}

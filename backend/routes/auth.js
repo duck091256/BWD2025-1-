@@ -4,6 +4,8 @@ import { hash, compare } from 'bcrypt';
 import { query } from '../db.js';
 import axios from 'axios';
 
+const FE_URL = process.env.FE_URL || 'http://localhost:3000';
+
 // Đăng ký
 router.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
@@ -79,7 +81,7 @@ router.post('/login', async (req, res) => {
 // Google OAuth config
 const GOOGLE_CLIENT_ID = '56923204359-bvfrbnjevbgf50ua855dma9h4gc93gjn.apps.googleusercontent.com';
 const GOOGLE_CLIENT_SECRET = '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';
-const GOOGLE_REDIRECT_URI = 'http://localhost:5000/api/auth/google/callback';
+const GOOGLE_REDIRECT_URI = process.env.REACT_APP_GOOGLE_REDIRECT_URI;
 
 router.get('/auth/google', (req, res) => {
   const redirectUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${GOOGLE_REDIRECT_URI}&response_type=code&scope=openid%20email%20profile`;
@@ -138,7 +140,7 @@ router.get('/auth/google/callback', async (req, res) => {
       }
     }
 
-    res.redirect(`http://localhost:3000/oauth-success?name=${encodeURIComponent(name)}&id=${encodeURIComponent(userId)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatar)}&provider=Google`);
+    res.redirect(`${FE_URL}/oauth-success?name=${encodeURIComponent(name)}&id=${encodeURIComponent(userId)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatar)}&provider=Google`);
 
   } catch (err) {
     console.error(err);
@@ -149,7 +151,7 @@ router.get('/auth/google/callback', async (req, res) => {
 // Discord OAuth config
 const DISCORD_CLIENT_ID = '1370100195274133664';
 const DISCORD_CLIENT_SECRET = 'KRDex32jakr0anszGo4ol0Dz_ao6DnI6';
-const DISCORD_REDIRECT_URI = 'http://localhost:5000/api/auth/discord/callback';
+const DISCORD_REDIRECT_URI = process.env.REACT_APP_DISCORD_REDIRECT_URI;
 
 router.get('/auth/discord', (req, res) => {
   const redirectUrl = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(DISCORD_REDIRECT_URI)}&response_type=code&scope=identify%20email`;
@@ -228,7 +230,7 @@ router.get('/auth/discord/callback', async (req, res) => {
     }
 
     // Gửi thông tin về frontend
-    res.redirect(`http://localhost:3000/oauth-success?name=${encodeURIComponent(displayName)}&id=${encodeURIComponent(userId)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatarUrl)}&provider=Discord`);
+    res.redirect(`${FE_URL}/oauth-success?name=${encodeURIComponent(displayName)}&id=${encodeURIComponent(userId)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatarUrl)}&provider=Discord`);
 
   } catch (err) {
     console.error('Discord OAuth Error:', err);
@@ -239,7 +241,7 @@ router.get('/auth/discord/callback', async (req, res) => {
 // GitHub OAuth config
 const GITHUB_CLIENT_ID = 'Ov23li8asT9OKkV68Uqm';
 const GITHUB_CLIENT_SECRET = '30a18a87ba84f6bbe79506abc612555a4e751068';
-const GITHUB_REDIRECT_URI = 'http://localhost:5000/api/auth/github/callback';
+const GITHUB_REDIRECT_URI = process.env.REACT_APP_GITHUB_REDIRECT_URI;
 
 router.get('/auth/github', (req, res) => {
   const githubUrl = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${GITHUB_REDIRECT_URI}&scope=user`;
@@ -317,7 +319,7 @@ router.get('/auth/github/callback', async (req, res) => {
       }
     }
 
-    res.redirect(`http://localhost:3000/oauth-success?name=${encodeURIComponent(displayName)}&id=${encodeURIComponent(userId)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatar_url)}&provider=GitHub`);
+    res.redirect(`${FE_URL}/oauth-success?name=${encodeURIComponent(displayName)}&id=${encodeURIComponent(userId)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatar_url)}&provider=GitHub`);
   } catch (err) {
     console.error('GitHub OAuth Error:', err);
     res.status(500).send('GitHub OAuth Error');
@@ -327,7 +329,7 @@ router.get('/auth/github/callback', async (req, res) => {
 // Facebook OAuth config
 const FACEBOOK_CLIENT_ID = '1050396430472400';
 const FACEBOOK_CLIENT_SECRET = 'cdb40cf65c49d7b52facc8eebdb55a2c';
-const FACEBOOK_REDIRECT_URI = 'http://localhost:5000/api/auth/facebook/callback';
+const FACEBOOK_REDIRECT_URI = process.env.REACT_APP_FACEBOOK_REDIRECT_URI;
 
 router.get('/auth/facebook', (req, res) => {
   const url = `https://www.facebook.com/v18.0/dialog/oauth?client_id=${FACEBOOK_CLIENT_ID}&redirect_uri=${FACEBOOK_REDIRECT_URI}&scope=email,public_profile`;
@@ -396,7 +398,7 @@ router.get('/auth/facebook/callback', async (req, res) => {
       }
     }
 
-    res.redirect(`http://localhost:3000/oauth-success?name=${encodeURIComponent(name)}&id=${encodeURIComponent(userId)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatarUrl)}&provider=Facebook`);
+    res.redirect(`${FE_URL}/oauth-success?name=${encodeURIComponent(name)}&id=${encodeURIComponent(userId)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatarUrl)}&provider=Facebook`);
   } catch (err) {
     console.error('Facebook OAuth Error:', err);
     res.status(500).send('Facebook OAuth Error');

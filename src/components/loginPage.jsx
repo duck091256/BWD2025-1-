@@ -3,6 +3,7 @@ import '../styles/login.scss';
 import { useTranslation } from 'react-i18next';
 
 function LoginPage() {
+    const API = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
         const user = localStorage.getItem("user");
@@ -32,7 +33,7 @@ function LoginPage() {
         e.preventDefault(); // chặn reload trang khi submit
 
         try {
-            const res = await fetch('http://localhost:5000/api/register', {
+            const res = await fetch(`${API}/api/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(registerData) // { username, email, password }
@@ -77,7 +78,7 @@ function LoginPage() {
         setIsLoading(true);
 
         try {
-            const res = await fetch('http://localhost:5000/api/login', {
+            const res = await fetch(`${API}/api/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(loginData)

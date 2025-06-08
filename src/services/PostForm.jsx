@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
 
 const PostForm = ({ onPostSubmit, onClose }) => {
+  const API = process.env.REACT_APP_API_URL;
   const { user: localUser } = useContext(UserContext);
   
   const [content, setContent] = useState('');
@@ -20,7 +21,7 @@ const PostForm = ({ onPostSubmit, onClose }) => {
       formData.append('image', file);
 
       try {
-        const res = await fetch('http://localhost:5000/api/upload/image', {
+        const res = await fetch(`${API}/api/upload/image`, {
           method: 'POST',
           body: formData,
         });
@@ -89,7 +90,7 @@ const PostForm = ({ onPostSubmit, onClose }) => {
       <div className='image-preview-container'>
         {images.map((img, index) => (
           <div key={index} className='image-preview-item'>
-            <img src={`http://localhost:5000${img}`} alt={`preview ${index}`} />
+            <img src={`${API}${img}`} alt={`preview ${index}`} />
             <button type='button' onClick={() => removeImage(index)} className='remove-image-btn'>&times;</button>
           </div>
         ))}

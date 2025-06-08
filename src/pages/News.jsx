@@ -6,12 +6,13 @@ import '../styles/news.scss';
 import { UserContext } from '../context/UserContext';
 
 function News() {
+  const API = process.env.REACT_APP_API_URL;
   const [posts, setPosts] = useState([]);
   const [showPostCreator, setShowPostCreator] = useState(false);
   const { user: currentUser } = useContext(UserContext);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/posts')
+    fetch(`${API}/api/posts`)
       .then(res => res.json())
       .then(data => {
         const loadedPosts = data.map(post => ({
@@ -44,7 +45,7 @@ function News() {
     try {
       console.log('🛠 Dữ liệu gửi lên:', postToSave);
 
-      const res = await fetch('http://localhost:5000/api/posts', {
+      const res = await fetch(`${API}/api/posts`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(postToSave)

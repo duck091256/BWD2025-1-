@@ -3,12 +3,13 @@ import { useEffect, useState } from 'react';
 import '../styles/PostDetail.scss';
 
 function PostDetail({ readonly = false }) {
+  const API = process.env.REACT_APP_API_URL;
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const [likes, setLikes] = useState(0);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/posts/${id}`)
+    fetch(`${API}/api/posts/${id}`)
       .then(res => res.json())
       .then(data => {
         try {
@@ -52,7 +53,7 @@ function PostDetail({ readonly = false }) {
         {post.images.length > 0 && (
           <div className="post-images">
             {post.images.map((img, index) => (
-              <img key={index} src={`http://localhost:5000${img}`} alt={`img-${index}`} />
+              <img key={index} src={`${API}${img}`} alt={`img-${index}`} />
             ))}
           </div>
         )}
