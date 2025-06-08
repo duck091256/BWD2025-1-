@@ -25,9 +25,16 @@ router.post('/register', async (req, res) => {
 
     const hashedPassword = await hash(password, 10);
 
-    await query(
+    const [result] = await query(
       'INSERT INTO users (username, email, password, auth_provider) VALUES (?, ?, ?, ?)',
       [username, email, hashedPassword, 'local']
+    );
+
+    const newUserId = result.insertId;
+
+    await query(
+      'INSERT INTO user_profiles (user_id) VALUES (?)',
+      [newUserId]
     );
 
     res.json({ message: 'Registration successful!' });
@@ -103,22 +110,25 @@ router.get('/auth/google/callback', async (req, res) => {
 
     if (existing.length === 0) {
       // Thêm user mới và lấy ID
-      const result = await query(
+      await query(
         'INSERT INTO users (username, name, email, password, auth_provider, avatar) VALUES (?, ?, ?, ?, ?, ?)',
         [name, null, email, null, 'Google', avatar]
       );
-      
-      // Lấy ID vừa insert, tùy database mà cách lấy khác nhau
-      // Ví dụ với MySQL:
+
       const [rows] = await query('SELECT LAST_INSERT_ID() as id');
       userId = rows[0].id;
+
+      await query(
+        'INSERT INTO user_profiles (user_id) VALUES (?)',
+        [userId]
+      );
       
       // Hoặc nếu result trả về trực tiếp ID:
       // userId = result.insertId;
     } else {
       const user = existing[0];
       userId = user.id; // Lấy ID từ user đã tồn tại
-      
+
       if (!user.auth_provider.includes('Google')) {
         const providers = new Set(user.auth_provider.split(',').filter(Boolean));
         providers.add('Google');
@@ -193,10 +203,15 @@ router.get('/auth/discord/callback', async (req, res) => {
         'INSERT INTO users (username, name, email, password, auth_provider, avatar) VALUES (?, ?, ?, ?, ?, ?)',
         [displayName, null, email, null, 'Discord', avatarUrl]
       );
-          // Lấy ID vừa insert, tùy database mà cách lấy khác nhau
-      // Ví dụ với MySQL:
+
+      // Lấy ID vừa insert, tùy database mà cách lấy khác nhau
       const [rows] = await query('SELECT LAST_INSERT_ID() as id');
       userId = rows[0].id;
+
+      await query(
+        'INSERT INTO user_profiles (user_id) VALUES (?)',
+        [userId]
+      );
       
       // Hoặc nếu result trả về trực tiếp ID:
       // userId = result.insertId;
@@ -278,10 +293,15 @@ router.get('/auth/github/callback', async (req, res) => {
         'INSERT INTO users (username, name, email, password, auth_provider, avatar) VALUES (?, ?, ?, ?, ?, ?)',
         [name, null, displayName, email, null, 'Github', avatar_url]
       );
-          // Lấy ID vừa insert, tùy database mà cách lấy khác nhau
+      // Lấy ID vừa insert, tùy database mà cách lấy khác nhau
       // Ví dụ với MySQL:
       const [rows] = await query('SELECT LAST_INSERT_ID() as id');
       userId = rows[0].id;
+
+      await query(
+        'INSERT INTO user_profiles (user_id) VALUES (?)',
+        [userId]
+      );
       
       // Hoặc nếu result trả về trực tiếp ID:
       // userId = result.insertId;
@@ -352,10 +372,15 @@ router.get('/auth/facebook/callback', async (req, res) => {
         'INSERT INTO users (username, name, email, password, auth_provider, avatar) VALUES (?, ?, ?, ?, ?, ?)',
         [name, null, email, null, 'Facebook', avatarUrl]
       );
-          // Lấy ID vừa insert, tùy database mà cách lấy khác nhau
+      // Lấy ID vừa insert, tùy database mà cách lấy khác nhau
       // Ví dụ với MySQL:
       const [rows] = await query('SELECT LAST_INSERT_ID() as id');
       userId = rows[0].id;
+
+      await query(
+        'INSERT INTO user_profiles (user_id) VALUES (?)',
+        [userId]
+      );
       
       // Hoặc nếu result trả về trực tiếp ID:
       // userId = result.insertId;

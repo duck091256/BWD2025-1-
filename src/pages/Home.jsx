@@ -103,7 +103,7 @@ const HeroSection = () => {
       </motion.p>
       <motion.div className="mt-8" variants={childVariants} whileHover={{ scale: 1.06 }} transition={{ duration: 0.3 }}>
         <Link
-          to="/tours"
+          to="/travel"
           className="text-lg bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700 transition"
         >
           {t('home.secondSection.button')}

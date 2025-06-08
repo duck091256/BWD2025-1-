@@ -28,9 +28,9 @@ app.use('/api/posts', postRoutes);
 app.use('/api/upload', uploadRoutes);
 
 // Khởi tạo database nếu cần
-initDB();
+// initDB();
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`✅ Server chạy tại http://localhost:${PORT}`);
 });
