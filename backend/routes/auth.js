@@ -140,7 +140,7 @@ router.get('/auth/google/callback', async (req, res) => {
       }
     }
 
-    res.redirect(`${FE_URL}/oauth-success?name=${encodeURIComponent(name)}&id=${encodeURIComponent(userId)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatar)}&provider=Google`);
+    res.redirect(`${FE_URL}/#/oauth-success?name=${encodeURIComponent(name)}&id=${encodeURIComponent(userId)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatar)}&provider=Google`);
 
   } catch (err) {
     console.error(err);
@@ -230,7 +230,7 @@ router.get('/auth/discord/callback', async (req, res) => {
     }
 
     // Gửi thông tin về frontend
-    res.redirect(`${FE_URL}/oauth-success?name=${encodeURIComponent(displayName)}&id=${encodeURIComponent(userId)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatarUrl)}&provider=Discord`);
+    res.redirect(`${FE_URL}/#/oauth-success?name=${encodeURIComponent(displayName)}&id=${encodeURIComponent(userId)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatarUrl)}&provider=Discord`);
 
   } catch (err) {
     console.error('Discord OAuth Error:', err);
@@ -319,7 +319,7 @@ router.get('/auth/github/callback', async (req, res) => {
       }
     }
 
-    res.redirect(`${FE_URL}/oauth-success?name=${encodeURIComponent(displayName)}&id=${encodeURIComponent(userId)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatar_url)}&provider=GitHub`);
+    res.redirect(`${FE_URL}/#/oauth-success?name=${encodeURIComponent(displayName)}&id=${encodeURIComponent(userId)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatar_url)}&provider=GitHub`);
   } catch (err) {
     console.error('GitHub OAuth Error:', err);
     res.status(500).send('GitHub OAuth Error');
@@ -398,7 +398,7 @@ router.get('/auth/facebook/callback', async (req, res) => {
       }
     }
 
-    res.redirect(`${FE_URL}/oauth-success?name=${encodeURIComponent(name)}&id=${encodeURIComponent(userId)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatarUrl)}&provider=Facebook`);
+    res.redirect(`${FE_URL}/#/oauth-success?name=${encodeURIComponent(name)}&id=${encodeURIComponent(userId)}&email=${encodeURIComponent(email)}&avatar=${encodeURIComponent(avatarUrl)}&provider=Facebook`);
   } catch (err) {
     console.error('Facebook OAuth Error:', err);
     res.status(500).send('Facebook OAuth Error');
