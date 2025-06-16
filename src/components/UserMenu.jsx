@@ -4,15 +4,17 @@ import '../styles/UserMenu.scss';
 import { useTranslation } from 'react-i18next';
 import LanguageSelector from './LanguageSelector';
 import ThemeToggle from './ThemeToggle';
+import { useNavigate } from 'react-router-dom';
 
 const UserMenu = ({ user }) => {
+    const navigate = useNavigate();
     const { t } = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
     const menuRef = useRef(null);
 
     const handleLogout = () => {
         localStorage.removeItem('user');
-        window.location.href = '/';
+        navigate('/');
     };
 
     // Đóng dropdown nếu click ra ngoài

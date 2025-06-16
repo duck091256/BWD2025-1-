@@ -8,10 +8,14 @@ const poolLocalhost = mysql.createPool({
 });
 
 const poolDeploy = mysql.createPool({
-  host: 'sql12.freesqldatabase.com',
-  user: 'sql12783648',
-  password: 'XtFSgUsFjp',
-  database: 'sql12783648',
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  ssl: { rejectUnauthorized: false }, // Bắt buộc nếu Railway yêu cầu SSL
+  waitForConnections: true,
+  connectionLimit: 10,
 });
 
 export const query = (sql, params) => {

@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/login.scss';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
+    const navigate = useNavigate();
     const API = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
         const user = localStorage.getItem("user");
 
         if (user) {
-            window.location.href = '/';
+            navigate('/');
         }
     }, []);
 
@@ -121,7 +123,7 @@ function LoginPage() {
 
             // Đợi 1.5s rồi chuyển trang
             setTimeout(() => {
-                window.location.href = '/';
+                navigate('/');
             }, 1500);
 
         } catch (err) {
@@ -186,10 +188,10 @@ function LoginPage() {
                         )}
                         <p>{t('loginPage.otherOption')}</p>
                         <div className="social-icons">
-                            <a href="http://localhost:5000/api/auth/google"><i className='bx bxl-google' ></i></a>
-                            <a href="http://localhost:5000/api/auth/facebook"><i class='bx bxl-facebook-circle' ></i></a>
-                            <a href="http://localhost:5000/api/auth/github"><i className='bx bxl-github' ></i></a>
-                            <a href="http://localhost:5000/api/auth/discord"><i class='bx bxl-discord-alt'></i></a>
+                            <a href={`${API}/api/auth/google`}><i className='bx bxl-google'></i></a>
+                            <a href={`${API}/api/auth/facebook`}><i className='bx bxl-facebook-circle'></i></a>
+                            <a href={`${API}/api/auth/github`}><i className='bx bxl-github'></i></a>
+                            <a href={`${API}/api/auth/discord`}><i className='bx bxl-discord-alt'></i></a>
                         </div>
                     </form>
                 </div>
@@ -246,10 +248,10 @@ function LoginPage() {
                         )}
                         <p>{t('registerPage.otherOption')}</p>
                         <div className="social-icons">
-                            <a href="http://localhost:5000/api/auth/google"><i className='bx bxl-google'></i></a>
-                            <a href="http://localhost:5000/api/auth/facebook"><i class='bx bxl-facebook-circle' ></i></a>
-                            <a href="http://localhost:5000/api/auth/github"><i className='bx bxl-github'></i></a>
-                            <a href="http://localhost:5000/api/auth/discord"><i class='bx bxl-discord-alt'></i></a>
+                            <a href={`${API}/api/auth/google`}><i className='bx bxl-google'></i></a>
+                            <a href={`${API}/api/auth/facebook`}><i className='bx bxl-facebook-circle'></i></a>
+                            <a href={`${API}/api/auth/github`}><i className='bx bxl-github'></i></a>
+                            <a href={`${API}/api/auth/discord`}><i className='bx bxl-discord-alt'></i></a>
                         </div>
                     </form>
                 </div>
