@@ -4,7 +4,7 @@ import { hash, compare } from 'bcrypt';
 import { query } from '../db.js';
 import axios from 'axios';
 
-const FE_URL = process.env.FE_URL || 'http://localhost:3000';
+const FE_URL = process.env.REACT_APP_FE_URL || 'http://localhost:3000';
 
 // Đăng ký
 router.post('/register', async (req, res) => {
