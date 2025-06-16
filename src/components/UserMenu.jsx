@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/UserMenu.scss';
 import { useTranslation } from 'react-i18next';
 import LanguageSelector from './LanguageSelector';
 import ThemeToggle from './ThemeToggle';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
 
 const UserMenu = ({ user }) => {
     const navigate = useNavigate();
@@ -12,8 +13,11 @@ const UserMenu = ({ user }) => {
     const [isOpen, setIsOpen] = useState(false);
     const menuRef = useRef(null);
 
+    const { setUser } = useContext(UserContext);
+
     const handleLogout = () => {
         localStorage.removeItem('user');
+        setUser(null);
         navigate('/');
     };
 

@@ -34,4 +34,8 @@ router.post('/image', upload.single('image'), (req, res) => {
   res.json({ success: true, url: imageUrl });
 });
 
+router.get('./image', (req, res) => {
+  res.status(200).json.send('Upload image successfully');
+});
+
 export default router;

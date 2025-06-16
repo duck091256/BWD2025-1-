@@ -4,6 +4,8 @@ import '../styles/navbar.scss';
 import logo from '../assets/images/logo/travel-logo.png';
 import UserMenu from './UserMenu';
 import { useTranslation } from 'react-i18next';
+import { useContext } from 'react';
+import { UserContext } from '../context/UserContext';
 
 const Navbar = () => {
     const [show, setShow] = useState(true);
@@ -15,15 +17,8 @@ const Navbar = () => {
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
-    const [user, setUser] = useState(null);
-
-    // 📌 1. Lấy user từ localStorage
-    useEffect(() => {
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
-        }
-    }, []);
+    // 📌 1. Đồng bộ user    
+    const { user, setUser } = useContext(UserContext);
 
     // 📌 2. Theo dõi scroll để ẩn/hiện navbar
     useEffect(() => {

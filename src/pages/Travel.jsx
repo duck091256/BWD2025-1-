@@ -16,11 +16,9 @@ import hochiminhImg from '../assets/images/travel/hochiminh.webp';
 import hagiangImg from '../assets/images/travel/hagiang.jpg';
 import hueImg from '../assets/images/travel/hue.jpg';
 import quotationImg from '../assets/images/travel/quotation.png';
-// import review1Img from '../assets/images/travel/review1.jpg';
-// import review2Img from '../assets/images/travel/review2.jpg';
-// import review3Img from '../assets/images/travel/review3.jpg';
 import video12 from '../assets/images/travel/12.mp4';
 import '../styles/travel.scss';
+import { useTranslation } from 'react-i18next';
 
 const tourData = [
   {
@@ -118,6 +116,8 @@ function Modal({ show, onClose, children }) {
 }
 
 function Travel() {
+  const { t } = useTranslation();
+
   const [form, setForm] = useState({
     location: "0",
     people: "",
@@ -188,111 +188,92 @@ function Travel() {
 
   const handleCloseModal = () => setModalContent(null);
   const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
+  const featuredTours = t('travel.secondSection.tours', { returnObjects: true });
+  const tourImages = [image1Img, image2Img, image3Img];
+
+  const aboutData = t('travel.thirdSection.whyChooseUs', { returnObjects: true });
+  const services = t('travel.thirdSection.services', { returnObjects: true });
+  const serviceImages = [service1Img, service2Img, service3Img];
 
   return (
     <div className="travel-container">
       <header>
         <div className="video-container">
-          <video src={video12} autoPlay muted loop />
+          <video src={video12} autoPlay muted loop onContextMenu={(e) => e.preventDefault()}
+            style={{
+              pointerEvents: 'none',
+              userSelect: 'none'
+            }} />
         </div>
         <div className="header-content">
-          <h1>Khám phá</h1>
-          <p>Xách ba lô lên và đi nào</p>
+          <h1>{t('travel.firstSection.title')}</h1>
+          <p>{t('travel.firstSection.subtitle')}</p>
+
           <form onSubmit={handleSubmit} className="travel-form">
-            <h1>Bạn muốn đi đâu ?</h1>
-            <p>Địa điểm</p>
+            <h1>{t('travel.firstSection.form.title')}</h1>
+            <p>{t('travel.firstSection.form.location.label')}</p>
             <select name="location" value={form.location} onChange={handleChange}>
-              <option value="0">--Chọn địa điểm--</option>
-              <option value="1">Hà Nội</option>
-              <option value="2">Đà Nẵng</option>
-              <option value="3">Hội An</option>
-              <option value="4">Nha Trang</option>
-              <option value="5">Phú Quốc</option>
+              <option value="0">{t('travel.firstSection.form.location.placeholder')}</option>
+              <option value="1">{t('travel.firstSection.form.location.options.hanoi')}</option>
+              <option value="2">{t('travel.firstSection.form.location.options.danang')}</option>
+              <option value="3">{t('travel.firstSection.form.location.options.hoian')}</option>
+              <option value="4">{t('travel.firstSection.form.location.options.nhatrang')}</option>
+              <option value="5">{t('travel.firstSection.form.location.options.phuquoc')}</option>
             </select>
-            <p>Số người</p>
-            <input name="people" type="number" min="1" placeholder="Bạn đi bao nhiêu người" value={form.people} onChange={handleChange} />
-            <p>Ngày đi</p>
+            <p>{t('travel.firstSection.form.people.label')}</p>
+            <input name="people" type="number" min="1" placeholder={t('travel.firstSection.form.people.placeholder')} value={form.people} onChange={handleChange} />
+            <p>{t('travel.firstSection.form.startDate.label')}</p>
             <input name="start" type="date" value={form.start} onChange={handleChange} />
-            <p>Ngày về</p>
+            <p>{t('travel.firstSection.form.endDate.label')}</p>
             <input name="end" type="date" value={form.end} onChange={handleChange} />
-            <button type="submit">Tìm kiếm</button>
+            <button type="submit">{t('travel.firstSection.form.submit')}</button>
           </form>
         </div>
       </header>
 
       <section className="nice-place">
         <div className="container">
-          <h1 className="h1-style">Tour nổi bật</h1>
+          <h1 className="h1-style">{t('travel.secondSection.featuredToursTitle')}</h1>
           <div className="nice-place-content row">
-            <div className="nice-place-item">
-              <div className="nice-place-item-img">
-                <img src={image1Img} alt="Hà Nội" />
-              </div>
-              <div className="nice-place-item-text">
-                <h2>Tour Hà Nội</h2>
-                <div className="star-group">
-                  {[...Array(5)].map((_, i) => <i key={i} className="fas fa-star"></i>)}
+            {featuredTours.map((tour, index) => (
+              <div className="nice-place-item" key={index}>
+                <div className="nice-place-item-img">
+                  <img src={tourImages[index]} alt={tour.title} />
                 </div>
-                <p>Hà Nội, thủ đô của Việt Nam, nổi tiếng với kiến trúc trăm tuổi và nền văn hóa phong phú với sự ảnh hưởng của khu vực Đông Nam Á, Trung Quốc và Pháp.</p>
-                <button className="btn">Mua Tour</button>
-              </div>
-            </div>
-            <div className="nice-place-item">
-              <div className="nice-place-item-img">
-                <img src={image2Img} alt="Tây Bắc" />
-              </div>
-              <div className="nice-place-item-text">
-                <h2>Tour Tây Bắc</h2>
-                <div className="star-group">
-                  {[...Array(5)].map((_, i) => <i key={i} className="fas fa-star"></i>)}
+                <div className="nice-place-item-text">
+                  <h2>{tour.title}</h2>
+                  <div className="star-group">
+                    {[...Array(5)].map((_, i) => <i key={i} className="fas fa-star"></i>)}
+                  </div>
+                  <p>{tour.description}</p>
+                  <button className="btn">{tour.button}</button>
                 </div>
-                <p>Tây Bắc Bộ, vùng Tây Bắc hay ngắn gọn là Tây Bắc là vùng miền núi phía tây của miền Bắc Việt Nam, có chung đường biên giới với Lào và Trung Quốc.</p>
-                <button className="btn">Mua Tour</button>
               </div>
-            </div>
-            <div className="nice-place-item">
-              <div className="nice-place-item-img">
-                <img src={image3Img} alt="Hạ Long" />
-              </div>
-              <div className="nice-place-item-text">
-                <h2>Tour Hạ Long</h2>
-                <div className="star-group">
-                  {[...Array(5)].map((_, i) => <i key={i} className="fas fa-star"></i>)}
-                </div>
-                <p>Hạ Long là thành phố tỉnh lỵ của tỉnh Quảng Ninh, Việt Nam. Thành phố được đặt theo tên của vịnh Hạ Long, là một di sản thiên nhiên nổi tiếng của Việt Nam.</p>
-                <button className="btn">Mua Tour</button>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       <section className="about">
         <div className="container">
-          <h1 className="h1-style">About</h1>
+          <h1 className="h1-style">{t('travel.thirdSection.aboutTitle')}</h1>
           <div className="about-content row">
             <div className="about-content-left">
-              <img src={aboutImg} alt="" />
+              <img src={aboutImg} alt={aboutData.title} />
             </div>
             <div className="about-content-right">
-              <h2>Tại sao bạn nên chọn chúng tôi ?</h2>
-              <p>Chúng tôi là công ty hàng đầu về cung cấp dịch vụ lữ hành hàng nội địa và quốc tế.</p>
-              <button className="btn">Tìm hiều thêm</button>
+              <h2>{aboutData.title}</h2>
+              <p>{aboutData.description}</p>
+              <button className="btn">{aboutData.button}</button>
             </div>
           </div>
           <div className="service row">
-            <div className="service-item">
-              <img src={service1Img} alt="" />
-              <p>Đặt phòng</p>
-            </div>
-            <div className="service-item">
-              <img src={service2Img} alt="" />
-              <p>Dịch vụ 24/7</p>
-            </div>
-            <div className="service-item">
-              <img src={service3Img} alt="" />
-              <p>Guide book</p>
-            </div>
+            {services.map((service, index) => (
+              <div className="service-item" key={index}>
+                <img src={serviceImages[index]} alt={service.name} />
+                <p>{service.name}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

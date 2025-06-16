@@ -92,6 +92,111 @@
       "button-2": "Discover Now"
     }
   },
+  "travel": {
+    "firstSection": {
+      "title": "Discover",
+      "subtitle": "Pack your bag and let's go",
+      "form": {
+        "title": "Where do you want to go?",
+        "location": {
+          "label": "Destination",
+          "placeholder": "--Select destination--",
+          "options": {
+            "hanoi": "Hanoi",
+            "danang": "Da Nang",
+            "hoian": "Hoi An",
+            "nhatrang": "Nha Trang",
+            "phuquoc": "Phu Quoc"
+          }
+        },
+        "people": {
+          "label": "Number of people",
+          "placeholder": "How many people are going"
+        },
+        "startDate": {
+          "label": "Departure date"
+        },
+        "endDate": {
+          "label": "Return date"
+        },
+        "submit": "Search"
+      }
+    },
+    "secondSection": {
+      "featuredToursTitle": "Featured Tours",
+      "tours": [
+        {
+          "title": "Hanoi Tour",
+          "description": "Hanoi, the capital of Vietnam, is known for its centuries-old architecture and a rich culture with Southeast Asian, Chinese and French influences.",
+          "button": "Book Tour"
+        },
+        {
+          "title": "Northwest Tour",
+          "description": "The Northwest region is the mountainous area in the west of Northern Vietnam, sharing borders with Laos and China.",
+          "button": "Book Tour"
+        },
+        {
+          "title": "Ha Long Tour",
+          "description": "Ha Long is the capital city of Quang Ninh province, Vietnam. The city is named after Ha Long Bay, a famous natural heritage site of Vietnam.",
+          "button": "Book Tour"
+        }
+      ]
+    },
+    "thirdSection": {
+      "aboutTitle": "About",
+      "whyChooseUs": {
+        "title": "Why should you choose us?",
+        "description": "We are the leading company in providing domestic and international travel services.",
+        "button": "Learn more"
+      },
+      "services": [
+        {
+          "name": "Booking"
+        },
+        {
+          "name": "24/7 Service"
+        },
+        {
+          "name": "Guide book"
+        }
+      ]
+    },
+    "fourthSection": {
+      "summerTourTitle": "Summer Tour 2025",
+      "tours": [
+        {
+          "title": "Da Lat",
+          "description": "Da Lat is the capital of Lam Dong province, located on the Lam Vien plateau, in the Central Highlands region of Vietnam.",
+          "button": "Explore"
+        },
+        {
+          "title": "Hoi An",
+          "description": "Hoi An Ancient Town was once a bustling international trading port, consisting of architectural heritage from hundreds of years ago, recognized by UNESCO as a world cultural heritage in 1999.",
+          "button": "Explore"
+        },
+        {
+          "title": "Ho Chi Minh",
+          "description": "Ho Chi Minh City (commonly known as Saigon) is a city in southern Vietnam famous for its pivotal role in the Vietnam War.",
+          "button": "Explore"
+        },
+        {
+          "title": "Da Nang",
+          "description": "Da Nang is the largest city in Central Vietnam, playing the role of a major political and socio-economic center of the region and an important nucleus in the Central Key Economic Zone.",
+          "button": "Explore"
+        },
+        {
+          "title": "Ha Giang",
+          "description": "Ha Giang city is the economic and political center of Ha Giang province, located in the center of the province, near the Thanh Thuy border gate on the Vietnam-China border.",
+          "button": "Explore"
+        },
+        {
+          "title": "Hue",
+          "description": "Hue city was the capital of Vietnam during the Tay Son and Nguyen dynasties, with administrative boundaries corresponding to the current Phu Xuan and Thuan Hoa districts.",
+          "button": "Explore"
+        }
+      ]
+    }
+  },
   "registerPage": {
     "rightTitle": "Welcome Back!",
     "subRightTitle": "Already have an account?",
